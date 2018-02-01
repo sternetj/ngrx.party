@@ -9,4 +9,4 @@ app.use(express.static('dist'));
 
 app.get('/', (req, res) => fs.createReadStream('dist/index.html').pipe(res));
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(3000, () => console.log('Server running: PORT 3000'))
