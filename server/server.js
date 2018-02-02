@@ -18,4 +18,9 @@ app.get('/supplies', (req, res) => {
     res.send(supplies.find());
 });
 
+app.post('/supplies', (req, res) => {
+    const id = supplies.insert(req.body).$loki;
+    res.send(id);
+})
+
 app.listen(3000, () => console.log('Server running: PORT 3000'))

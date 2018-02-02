@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
+import { SuppliesService } from '../shared/services/supplies.service';
 
-@NgModule()
-export class CoreModule {
-
-}
+@NgModule({
+    providers: [
+        SuppliesService,
+    ]
+})
+export class CoreModule {}
