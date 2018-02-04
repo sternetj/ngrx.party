@@ -10,7 +10,8 @@
     "test": "ng test --single-run",
     "serve": "node ./server/server.js",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "heroku-postinstall": "npm run build"
   },
   "private": true,
   "dependencies": {

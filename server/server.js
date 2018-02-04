@@ -25,4 +25,4 @@ app.post('/supplies', (req, res) => {
     res.send(id);
 })
 
-app.listen(port, () => console.log('Server running: PORT 3000'))
+app.listen(port, () => console.log(`Server running: PORT ${PORT}`))
