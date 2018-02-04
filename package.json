@@ -11,7 +11,7 @@
     "serve": "node ./server/server.js",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "heroku-postinstall": "npm run build"
+    "postinstall": "if [ $BUILD_ASSETS ]; then npm run build; fi"
   },
   "private": true,
   "dependencies": {
