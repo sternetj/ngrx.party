@@ -4,6 +4,8 @@ const parser = require('body-parser');
 
 const fs = require('fs');
 
+const port = process.env.PORT || 3000;
+
 app.use(parser.json());
 app.use(express.static('dist'));
 
@@ -23,4 +25,4 @@ app.post('/supplies', (req, res) => {
     res.send(id);
 })
 
-app.listen(3000, () => console.log('Server running: PORT 3000'))
+app.listen(port, () => console.log('Server running: PORT 3000'))
