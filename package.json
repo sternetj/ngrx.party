@@ -11,7 +11,7 @@
     "serve": "node ./server/server.js",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "if [ $BUILD_ASSETS ]; then npm run build; fi"
+    "postinstall": "npm run build"
   },
   "private": true,
   "dependencies": {
