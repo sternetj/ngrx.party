@@ -1,9 +1,17 @@
 <div class="mat-elevation-z6" style="position: fixed;top: 0;left: 0;right: 0;z-index: 2;">
-  <nav style="background-color: #3f51b5; display: flex; flex-wrap: wrap; align-items: center; padding: 8px 16px; color: white">
-    <a mat-button>Home</a>
-    <a mat-button>Videos</a>
-    <a mat-button>Food</a>
-    <a mat-button>Games</a>
+  <nav style="background-color: #3f51b5; display: flex; justify-content: space-between; align-items: center; padding: 8px 16px; color: white">
+    <div>
+      <a mat-button>Home</a>
+      <a mat-button>Videos</a>
+      <a mat-button>Food</a>
+      <a mat-button>Games</a>
+    </div>
+    <div style="align-self: flex-end; display: flex; justify-content: center;align-items: center;" *ngIf="(user$ | async).isSet">
+      <span style="margin-right: 10px;">{{(user$ | async).name}}</span>
+      <div style="width: 40px; height: 40px; border-radius: 40px; background: #ff4081" matTooltip="Click to change" matTooltipPosition="right">
+      <img style="height: 32px; width: 32px; margin: 4px 0 0 4px;" [src]="(user$ | async).logo" />
+    </div>
+    </div>
   </nav>
 </div>
 <div class="container-fluid" style="margin-top: 56px">
