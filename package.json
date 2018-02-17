@@ -3,15 +3,15 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
     "build": "ng build --prod",
-    "go": "npm run build && node ./server/server.js",
-    "test": "ng test --single-run",
-    "serve": "node ./server/server.js",
-    "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "npm run build"
+    "go": "npm run build && node ./server/server.js",
+    "lint": "ng lint --format codeFrame --type-check true",
+    "ng": "ng",
+    "postinstall": "npm run build",
+    "serve": "node ./server/server.js",
+    "start": "ng serve",
+    "test": "ng test --single-run && npm run lint"
   },
   "private": true,
   "dependencies": {
