@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SuppliesService } from './shared/services/supplies.service';
 import { Supply } from './shared/models/supply';
 
@@ -7,12 +7,12 @@ import { Supply } from './shared/models/supply';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   constructor(private supplies: SuppliesService) {}
 
   public ngOnInit() {
-    var supply = new Supply();
+    const supply = new Supply();
     supply.name = 'Nachos';
     supply.count = 1;
     supply.obtained = true;
@@ -20,8 +20,8 @@ export class AppComponent {
     this.supplies.create(supply).subscribe();
 
     this.supplies.getAll().subscribe((supplies) => {
-      console.log(supplies)
-    })
+      console.log(supplies);
+    });
   }
 
 }

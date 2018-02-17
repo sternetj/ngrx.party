@@ -5,9 +5,10 @@ import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/observable/never';
 
+import { TestModule } from '../test/test.module';
+
 import { SuppliesService } from './shared/services/supplies.service';
 import { Supply } from './shared/models/supply';
-import { create } from 'domain';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -15,6 +16,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
+      imports: [TestModule],
       providers: [
         {
           provide: SuppliesService,
