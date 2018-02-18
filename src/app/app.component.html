@@ -6,11 +6,9 @@
       <a mat-button>Food</a>
       <a mat-button>Games</a>
     </div>
-    <div style="align-self: flex-end; display: flex; justify-content: center;align-items: center;" *ngIf="(user$ | async).isSet">
-      <span style="margin-right: 10px;">{{(user$ | async).name}}</span>
-      <div style="width: 40px; height: 40px; border-radius: 40px; background: #ff4081" matTooltip="Click to change" matTooltipPosition="right">
-      <img style="height: 32px; width: 32px; margin: 4px 0 0 4px;" [src]="(user$ | async).logo" />
-    </div>
+    <div style="align-self: flex-end; display: flex; justify-content: center;align-items: center;" *ngIf="(user$ | async)?.isSet">
+      <span style="margin-right: 10px;">Welcome, {{(user$ | async)?.name}}</span>
+      <app-user-icon [logo]="(user$ | async)?.logo" size="40" color="accent"></app-user-icon>
     </div>
   </nav>
 </div>

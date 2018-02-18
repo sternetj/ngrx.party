@@ -3,7 +3,7 @@ import { ActionReducerMap, createSelector } from '@ngrx/store';
 import * as user from './user/user.reducer';
 
 export interface AppState {
-  user: user.State,
+  user: user.State;
 }
 
 export const reducers: ActionReducerMap<any> = {

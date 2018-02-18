@@ -1,3 +1,4 @@
+import { SharedModule } from '../shared/shared.module';
 import { NgModule } from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
@@ -11,6 +12,7 @@ import { reducers } from './state';
 @NgModule({
     imports: [
       BrowserAnimationsModule,
+      SharedModule,
       MatButtonModule,
       MatDialogModule,
       MatInputModule,

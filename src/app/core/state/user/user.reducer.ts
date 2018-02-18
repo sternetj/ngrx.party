@@ -6,15 +6,15 @@ export interface State {
   logo: string;
 }
 
-const defaultState: State = {
+let defaultState: State = {
   isSet: false,
   name: '',
   logo: ''
 };
 
-const userInfo = window.localStorage.getItem('user-info')
+const userInfo = window.localStorage.getItem('user-info');
 if (userInfo) {
-  defaultState = JSON.parse(JSON.parse((userInfo));
+  defaultState = JSON.parse(userInfo);
 }
 
 export function reducer(state: State = defaultState, action: userActions.Actions) {
