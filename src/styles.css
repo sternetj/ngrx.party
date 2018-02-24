@@ -1,2 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.display-1 {
+  font-size: 2.5rem;
+  line-height: 2.75rem;
+  font-weight: bold;
+}
+
+.title {
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  font-weight: bold;
+}
+
+.body-1, .body-2 {
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: 1.4em;
+}
+
+.body-2 {
+  font-weight: bold;
+}

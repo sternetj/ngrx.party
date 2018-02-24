@@ -1,0 +1,13 @@
+<div mat-dialog-title class="display-1">Welcome to the Party!</div>
+<mat-dialog-content>
+  <p class="body-1">We need some basic info before you get started.</p>
+  <div style="display: flex; align-items: flex-end;">
+    <app-user-icon [logo]="profileImages[profileIndex]" size="80" color="primary" matTooltip="Click to change" matTooltipPosition="right" (click)="nextImage()"></app-user-icon>
+    <mat-form-field style="margin-left: 20px; flex-grow: 1;">
+      <input matInput #name placeholder="Enter your Name" />
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions style="justify-content: flex-end;">
+  <button [disabled]="!name.value" mat-raised-button color="warn" [mat-dialog-close]="{'logo': profileImages[profileIndex], 'name': name.value}">Continue</button>
+</mat-dialog-actions>
