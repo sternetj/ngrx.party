@@ -18,7 +18,26 @@ import { State } from './core/state/user/user.reducer';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  user$: Observable<State>;
+  public user$: Observable<State>;
+  public navLinks = [
+    {
+      path: '/',
+      label: 'Home',
+    },
+    // {
+    //   path: '/videos',
+    //   lable: 'Food',
+    // },
+    {
+      path: '/food',
+      label: 'Food',
+    },
+    // {
+    //   path: '/games',
+    //   lable: 'Games',
+    // }
+  ];
+
   constructor(private supplies: SuppliesService,
     private store: Store<AppState>,
     private dialog: MatDialog) {}

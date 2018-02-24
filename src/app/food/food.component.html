@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <div class="row" *ngFor="let i of [1,2,3]" style="display: block">
+    <div class="col-xs-12">
+      <mat-card style="margin: 20px;">
+        <div style="display: flex;">
+          <div style="flex: 1 1 auto;">
+            <h2 mat-card-header>Nachos</h2>
+            <div style="display: flex;">
+              <p style="flex: 1 1 auto;">
+                Nachos smothered in cheese and jalepenos!
+              </p>
+            </div>
+            <div style="display: flex; align-items: center">
+              <app-user-icon logo="//ssl.gstatic.com/docs/common/profile/badger_lg.png"></app-user-icon>
+              <app-user-icon logo="//ssl.gstatic.com/docs/common/profile/badger_lg.png"></app-user-icon>
+              <app-user-icon logo="//ssl.gstatic.com/docs/common/profile/badger_lg.png"></app-user-icon>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; justify-content: center;">
+            <div style="align-self: flex-end">3 Remaining</div>
+            <button mat-raised-button color="accent">I'll Bring It</button>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

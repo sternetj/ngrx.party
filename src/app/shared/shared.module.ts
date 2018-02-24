@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule, MatCardModule, MatProgressBarModule, MatDialogModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatProgressBarModule, MatDialogModule, MatTabsModule } from '@angular/material';
 import { UserIconComponent } from './components/user-icon/user-icon.component';
 
 @NgModule({
@@ -10,6 +10,7 @@ import { UserIconComponent } from './components/user-icon/user-icon.component';
       MatCardModule,
       MatDialogModule,
       MatProgressBarModule,
+      MatTabsModule,
       UserIconComponent,
     ],
     imports: [

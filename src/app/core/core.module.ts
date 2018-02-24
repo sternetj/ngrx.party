@@ -8,6 +8,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { SuppliesService } from '../shared/services/supplies.service';
 import { WelcomeModalComponent } from './welcome-modal/welcome-modal.component';
 import { reducers } from './state';
+import { HttpClientModule } from '@angular/common/http';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
     imports: [
@@ -17,6 +19,7 @@ import { reducers } from './state';
       MatDialogModule,
       MatInputModule,
       MatTooltipModule,
+      HttpClientModule,
       StoreModule.forRoot(reducers),
       StoreDevtoolsModule.instrument({
         maxAge: 25,
@@ -25,7 +28,7 @@ import { reducers } from './state';
     providers: [
         SuppliesService
     ],
-    declarations: [WelcomeModalComponent],
+    declarations: [WelcomeModalComponent, RegisterComponent],
     entryComponents: [
       WelcomeModalComponent,
     ]
