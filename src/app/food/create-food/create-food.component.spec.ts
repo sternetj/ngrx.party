@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { MatExpansionModule, MatInputModule, MatButtonModule, MatCheckboxModule } from '@angular/material';
 
 import { CreateFoodComponent } from './create-food.component';
+import { TestModule } from '../../../test/test.module';
 
 describe('CreateFoodComponent', () => {
   let component: CreateFoodComponent;
@@ -8,7 +11,8 @@ describe('CreateFoodComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateFoodComponent ]
+      declarations: [ CreateFoodComponent ],
+      imports: [FormsModule, MatExpansionModule, MatInputModule, MatButtonModule, MatCheckboxModule, TestModule]
     })
     .compileComponents();
   }));

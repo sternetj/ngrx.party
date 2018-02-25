@@ -1,10 +1,11 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 import { Supply } from '../../shared/models/supply';
 
 @Component({
   selector: 'app-item-widget',
   templateUrl: './item-widget.component.html',
-  styleUrls: ['./item-widget.component.css']
+  styleUrls: ['./item-widget.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ItemWidgetComponent implements OnChanges {
   @Input() public supply: Supply;

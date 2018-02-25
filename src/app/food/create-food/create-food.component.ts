@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
 import { Supply } from '../../shared/models/supply';
 
 @Component({
   selector: 'app-create-food',
   templateUrl: './create-food.component.html',
-  styleUrls: ['./create-food.component.css']
+  styleUrls: ['./create-food.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateFoodComponent {
   public newSupply: Supply = {
