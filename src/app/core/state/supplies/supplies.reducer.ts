@@ -10,7 +10,7 @@ const defaultState: State = {
   food: [...environment.food]
 };
 
-export const reducer = (state = defaultState, action: supplies.Actions) => {
+export function reducer (state: State = defaultState, action: supplies.Actions) {
   switch (action.type) {
     case supplies.ADD_SUPPLY: {
       return {
@@ -22,4 +22,4 @@ export const reducer = (state = defaultState, action: supplies.Actions) => {
       return state;
     }
   }
-};
+}
