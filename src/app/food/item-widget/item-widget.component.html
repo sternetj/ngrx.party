@@ -1,0 +1,32 @@
+<div class="container-fluid">
+  <div class="row" style="display: block">
+    <div class="col-xs-12">
+      <mat-card style="margin: 20px;">
+        <div style="display: flex;">
+          <div style="flex: 1 1 auto;">
+            <h2 mat-card-header>{{supply.name}}</h2>
+            <div style="display: flex;">
+              <p style="flex: 1 1 auto;">
+                {{supply.description}}
+              </p>
+            </div>
+            <div style="display: flex; align-items: center">
+              <app-user-icon *ngFor="let user of supply.users" [logo]="user.logo" [matTooltip]="user.name" matTooltipPosition="below"></app-user-icon>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; justify-content: center;">
+            <div *ngIf="!supply.obtained; else complete" >
+              <div style="align-self: flex-end">{{remaining}} Remaining</div>
+              <button mat-raised-button color="accent">I'll Bring It</button>
+            </div>
+            <ng-template #complete>
+              <div style="background-color: #009688; height: 80px; width: 80px; border-radius: 50px; display: flex; align-items: center; justify-content: center; color: white;">
+                <mat-icon style="font-size: 3rem; height: 3rem; width: 3rem;">done</mat-icon>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

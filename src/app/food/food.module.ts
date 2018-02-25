@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FoodRoutingModule } from './food-routing.module';
 import { FoodComponent } from './food.component';
 import { SharedModule } from '../shared/shared.module';
+import { ItemWidgetComponent } from './item-widget/item-widget.component';
+import { CreateFoodComponent } from './create-food/create-food.component';
 
 @NgModule({
   imports: [
@@ -12,7 +14,9 @@ import { SharedModule } from '../shared/shared.module';
     FoodRoutingModule
   ],
   declarations: [
-    FoodComponent
+    FoodComponent,
+    ItemWidgetComponent,
+    CreateFoodComponent
   ]
 })
 export class FoodModule { }
