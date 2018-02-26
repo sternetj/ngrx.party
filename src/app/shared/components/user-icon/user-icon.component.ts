@@ -7,7 +7,7 @@ import { Component, Input, OnChanges } from '@angular/core';
 })
 export class UserIconComponent implements OnChanges {
   @Input() private color: 'primary' | 'accent' | 'warn' = 'primary';
-  @Input() public size: 40;
+  @Input() public size = 40;
   @Input() public logo: string;
   public colorHex: string;
 

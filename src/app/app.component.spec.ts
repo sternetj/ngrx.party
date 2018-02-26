@@ -10,7 +10,8 @@ import { TestModule } from '../test/test.module';
 import { SuppliesService } from './shared/services/supplies.service';
 import { Supply } from './shared/models/supply';
 import { StoreModule } from '@ngrx/store';
-import { MatDialogModule } from '@angular/material';
+import { MatDialogModule, MatTabsModule } from '@angular/material';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -21,7 +22,9 @@ describe('AppComponent', () => {
       imports: [
         TestModule,
         MatDialogModule,
+        MatTabsModule,
         StoreModule.forRoot({}),
+        RouterTestingModule.withRoutes([])
       ],
       providers: [
         {

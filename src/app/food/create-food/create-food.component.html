@@ -1,0 +1,30 @@
+<mat-expansion-panel #expPanel="matExpansionPanel" [ngClass]="{'mat-elevation-z1': expPanel.expanded, 'mat-elevation-z0': !expPanel.expanded}"
+  style="margin: 0 20px 20px 20px;">
+  <mat-expansion-panel-header>
+    <mat-panel-title>Add a Food</mat-panel-title>
+    <mat-panel-description>Click to expand and add a new food item</mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <form #form="ngForm" style="display: flex; flex-direction: column; justify-content: space-around;">
+
+    <mat-form-field>
+      <input name="name" [(ngModel)]="newSupply.name" matInput placeholder="Name" maxlength="100" required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <textarea name="description" [(ngModel)]="newSupply.description" matInput matTextareaAutosize matAutosizeMaxRows="3" placeholder="Description"
+        maxlength="500" required></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input name="count" [(ngModel)]="newSupply.count" matInput type="number" min="1" placeholder="Number needed" required
+      />
+    </mat-form-field>
+
+    <mat-checkbox name="willBring" [(ngModel)]="willBring" checked="true">I'll bring one!</mat-checkbox>
+  </form>
+
+  <mat-action-row>
+    <button mat-raised-button color="primary" [disabled]="!form.valid" (click)="addSupply()">Add this item!</button>
+  </mat-action-row>
+</mat-expansion-panel>
