@@ -30,7 +30,7 @@ describe('AppComponent', () => {
         {
           provide: FoodService,
           useValue: {
-            create: (supply: Food) => Observable.never(),
+            create: (food: Food) => Observable.never(),
             getAll: () => Observable.never(),
           },
         }

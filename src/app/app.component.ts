@@ -44,16 +44,6 @@ export class AppComponent implements OnInit {
 
   public ngOnInit() {
     this.user$ = this.store.select(selectUser);
-    const food = new Food();
-    food.name = 'Nachos';
-    food.count = 1;
-    food.obtained = true;
-
-    this.foodService.create(food).subscribe();
-
-    this.foodService.getAll().subscribe(food => {
-      console.log(food);
-    });
 
     this.user$.pipe(
       filter((user) => !user.isSet),
