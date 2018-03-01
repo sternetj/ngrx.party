@@ -8,6 +8,7 @@
     "go": "npm run build && node ./server/server.js",
     "lint": "ng lint --format codeFrame --type-check true",
     "ng": "ng",
+    "dev": "ng serve --proxy-config proxy.conf.json",
     "postinstall": "npm run build",
     "serve": "node ./server/server.js",
     "start": "ng serve",
