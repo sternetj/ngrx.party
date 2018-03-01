@@ -6,8 +6,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { filter, take } from 'rxjs/operators';
 
-import { SuppliesService } from './shared/services/supplies.service';
-import { Supply } from './shared/models/supply';
+import { FoodService } from './shared/services/food.service';
+import { Food } from './shared/models/food';
 import { WelcomeModalComponent } from './core/welcome-modal/welcome-modal.component';
 import { AppState, selectUser } from './core/state';
 import { State } from './core/state/user/user.reducer';
@@ -38,21 +38,21 @@ export class AppComponent implements OnInit {
     // }
   ];
 
-  constructor(private supplies: SuppliesService,
+  constructor(private foodService: FoodService,
     private store: Store<AppState>,
     private dialog: MatDialog) {}
 
   public ngOnInit() {
     this.user$ = this.store.select(selectUser);
-    const supply = new Supply();
-    supply.name = 'Nachos';
-    supply.count = 1;
-    supply.obtained = true;
+    const food = new Food();
+    food.name = 'Nachos';
+    food.count = 1;
+    food.obtained = true;
 
-    this.supplies.create(supply).subscribe();
+    this.foodService.create(food).subscribe();
 
-    this.supplies.getAll().subscribe(supplies => {
-      console.log(supplies);
+    this.foodService.getAll().subscribe(food => {
+      console.log(food);
     });
 
     this.user$.pipe(

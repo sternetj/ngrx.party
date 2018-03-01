@@ -8,16 +8,16 @@
   <form #form="ngForm" style="display: flex; flex-direction: column; justify-content: space-around;">
 
     <mat-form-field>
-      <input name="name" [(ngModel)]="newSupply.name" matInput placeholder="Name" maxlength="100" required />
+      <input name="name" [(ngModel)]="newFood.name" matInput placeholder="Name" maxlength="100" required />
     </mat-form-field>
 
     <mat-form-field>
-      <textarea name="description" [(ngModel)]="newSupply.description" matInput matTextareaAutosize matAutosizeMaxRows="3" placeholder="Description"
+      <textarea name="description" [(ngModel)]="newFood.description" matInput matTextareaAutosize matAutosizeMaxRows="3" placeholder="Description"
         maxlength="500" required></textarea>
     </mat-form-field>
 
     <mat-form-field>
-      <input name="count" [(ngModel)]="newSupply.count" matInput type="number" min="1" placeholder="Number needed" required
+      <input name="count" [(ngModel)]="newFood.count" matInput type="number" min="1" placeholder="Number needed" required
       />
     </mat-form-field>
 
@@ -25,6 +25,6 @@
   </form>
 
   <mat-action-row>
-    <button mat-raised-button color="primary" [disabled]="!form.valid" (click)="addSupply()">Add this item!</button>
+    <button mat-raised-button color="primary" [disabled]="!form.valid" (click)="addFood()">Add this item!</button>
   </mat-action-row>
 </mat-expansion-panel>

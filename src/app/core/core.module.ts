@@ -4,7 +4,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { SharedModule } from '../shared/shared.module';
-import { SuppliesService } from '../shared/services/supplies.service';
+import { FoodService } from '../shared/services/food.service';
 import { WelcomeModalComponent } from './welcome-modal/welcome-modal.component';
 import { reducers } from './state';
 import { HttpClientModule } from '@angular/common/http';
@@ -21,7 +21,7 @@ import { RegisterComponent } from './register/register.component';
       }),
     ],
     providers: [
-        SuppliesService
+      FoodService
     ],
     declarations: [WelcomeModalComponent, RegisterComponent],
     entryComponents: [

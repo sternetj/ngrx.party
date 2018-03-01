@@ -7,8 +7,8 @@ import 'rxjs/add/observable/never';
 
 import { TestModule } from '../test/test.module';
 
-import { SuppliesService } from './shared/services/supplies.service';
-import { Supply } from './shared/models/supply';
+import { FoodService } from './shared/services/food.service';
+import { Food } from './shared/models/food';
 import { StoreModule } from '@ngrx/store';
 import { MatDialogModule, MatTabsModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -28,9 +28,9 @@ describe('AppComponent', () => {
       ],
       providers: [
         {
-          provide: SuppliesService,
+          provide: FoodService,
           useValue: {
-            create: (supply: Supply) => Observable.never(),
+            create: (supply: Food) => Observable.never(),
             getAll: () => Observable.never(),
           },
         }
@@ -44,7 +44,7 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   }));
 
-  it('should call supplies service', async(() => inject([SuppliesService], (svc) => {
+  it('should call food service', async(() => inject([FoodService], (svc) => {
     const fixture = TestBed.createComponent(AppComponent);
     const createSpy = spyOn(svc, 'create');
     const getSpy = spyOn(svc, 'getAll');
