@@ -12,6 +12,10 @@ import { WelcomeModalComponent } from './core/welcome-modal/welcome-modal.compon
 import { AppState, selectUser } from './core/state';
 import { State } from './core/state/user/user.reducer';
 
+import { Subject } from 'rxjs/Subject';
+
+import { WebSocketService } from './shared/services/websocket.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -40,6 +44,7 @@ export class AppComponent implements OnInit {
 
   constructor(private foodService: FoodService,
     private store: Store<AppState>,
+    private wsService: WebSocketService,
     private dialog: MatDialog) {}
 
   public ngOnInit() {

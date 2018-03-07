@@ -6,6 +6,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { SharedModule } from '../shared/shared.module';
 import { FoodService } from '../shared/services/food.service';
+import { WebSocketService } from '../shared/services/websocket.service';
 import { WelcomeModalComponent } from './welcome-modal/welcome-modal.component';
 import { reducers, effects } from './state';
 import { HttpClientModule } from '@angular/common/http';
@@ -17,12 +18,14 @@ import { RegisterComponent } from './register/register.component';
       SharedModule,
       HttpClientModule,
       StoreModule.forRoot(reducers),
+      EffectsModule.forRoot(effects),
       StoreDevtoolsModule.instrument({
         maxAge: 25,
       }),
     ],
     providers: [
-      FoodService
+      FoodService,
+      WebSocketService,
     ],
     declarations: [WelcomeModalComponent, RegisterComponent],
     entryComponents: [

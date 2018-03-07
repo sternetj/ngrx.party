@@ -3,16 +3,22 @@ import { Action } from '@ngrx/store';
 
 export const GET_FOOD = '[Food] Get Food';
 export const SET_FOOD = '[Food] Set Food';
+export const ADD_FOOD = '[Food] Add Food';
 
 export class GetFood implements Action {
-  public type = GET_FOOD;
+  readonly type = GET_FOOD;
+}
+
+export class AddFood implements Action {
+  readonly type = ADD_FOOD;
+
+  constructor (public food: Food) { }
 }
 
 export class SetFood implements Action {
-  public type = SET_FOOD;
+  readonly type = SET_FOOD;
 
-  constructor (public food: Food | Food[]) { }
+  constructor (public food: Food[]) { }
 }
 
-// Why can't I export GetFood?
-export type Actions = SetFood;
+export type Actions = SetFood | GetFood | AddFood;

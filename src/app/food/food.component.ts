@@ -1,4 +1,4 @@
-import { SetFood, GetFood } from './../core/state/food/food.actions';
+import { SetFood, GetFood, AddFood } from './../core/state/food/food.actions';
 import { take } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import { AppState, selectFood, selectUser } from './../core/state/index';
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Food } from '../shared/models/food';
 import { State } from '../core/state/user/user.reducer';
+
+// Remove
+import { FoodService } from '../shared/services/food.service';
 
 @Component({
   selector: 'app-food',
@@ -15,7 +18,7 @@ import { State } from '../core/state/user/user.reducer';
 export class FoodComponent implements OnInit {
   public food$: Observable<Food[]>;
 
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<AppState>, private foodService: FoodService) { }
 
   public ngOnInit() {
     this.food$ = this.store.select(selectFood);
@@ -31,6 +34,6 @@ export class FoodComponent implements OnInit {
       event.food.users.push(currentUser);
     }
 
-    this.store.dispatch(new SetFood(event.food));
+    this.store.dispatch(new AddFood(event.food));
   }
 }

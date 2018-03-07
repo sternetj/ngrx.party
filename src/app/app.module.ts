@@ -8,9 +8,6 @@ import { CoreModule } from './core/core.module';
 import { OverviewComponent } from './overview/overview.component';
 import { AppRoutingMoudle } from './app-routing.module';
 
-import { EffectsModule } from '@ngrx/effects';
-import { effects } from './core/state';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +18,6 @@ import { effects } from './core/state';
     SharedModule,
     CoreModule,
     AppRoutingMoudle,
-    EffectsModule.forRoot(effects),
   ],
   bootstrap: [AppComponent]
 })

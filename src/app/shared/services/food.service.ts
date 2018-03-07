@@ -10,7 +10,7 @@ export class FoodService {
     constructor(private http: HttpClient) { }
 
     public getAll() {
-        return this.http.get<Food>(`/food`);
+        return this.http.get<Food[]>(`/food`);
     }
 
     public get(id: number) {

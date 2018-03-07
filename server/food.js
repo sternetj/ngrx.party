@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
+var events = require('events');
+
+var emitter = new events.EventEmitter();
+
 var food = [{
     id: 1,
     name: 'Nachos',
@@ -68,6 +72,8 @@ router.post('/', (req, res) => {
 
     food.push(newFood);
 
+    emitter.emit('food', food);
+
     res.send(newFood);
 });
 
@@ -85,4 +91,7 @@ router.delete('/:id', (req, res) => {
     res.status(200).end();
 });
 
-module.exports = router;
+module.exports = {
+  router,
+  emitter
+};
