@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
-import { Supply } from '../../shared/models/supply';
+import { Food } from '../../shared/models/food';
 
 @Component({
   selector: 'app-create-food',
@@ -8,7 +8,7 @@ import { Supply } from '../../shared/models/supply';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateFoodComponent {
-  public newSupply: Supply = {
+  public newFood: Food = {
     id: undefined,
     name: undefined,
     description: undefined,
@@ -18,17 +18,17 @@ export class CreateFoodComponent {
   };
   public willBring = true;
 
-  @Output() private addItem = new EventEmitter<{supply: Supply, willBring: boolean}>();
+  @Output() private addItem = new EventEmitter<{food: Food, willBring: boolean}>();
 
-  public addSupply() {
+  public addFood() {
     this.addItem.emit({
-      supply: this.newSupply,
+      food: this.newFood,
       willBring: this.willBring,
     });
 
-    this.newSupply = new Supply();
-    this.newSupply.count = 1;
-    this.newSupply.users = [];
+    this.newFood = new Food();
+    this.newFood.count = 1;
+    this.newFood.users = [];
     this.willBring = true;
   }
 }

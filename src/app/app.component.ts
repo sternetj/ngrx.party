@@ -6,11 +6,14 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { filter, take } from 'rxjs/operators';
 
-import { SuppliesService } from './shared/services/supplies.service';
-import { Supply } from './shared/models/supply';
+import { Food } from './shared/models/food';
 import { WelcomeModalComponent } from './core/welcome-modal/welcome-modal.component';
 import { AppState, selectUser } from './core/state';
 import { State } from './core/state/user/user.reducer';
+
+import { Subject } from 'rxjs/Subject';
+
+import { WebSocketService } from './shared/services/websocket.service';
 
 @Component({
   selector: 'app-root',
@@ -38,22 +41,12 @@ export class AppComponent implements OnInit {
     // }
   ];
 
-  constructor(private supplies: SuppliesService,
-    private store: Store<AppState>,
+  constructor(private store: Store<AppState>,
+    private wsService: WebSocketService,
     private dialog: MatDialog) {}
 
   public ngOnInit() {
     this.user$ = this.store.select(selectUser);
-    const supply = new Supply();
-    supply.name = 'Nachos';
-    supply.count = 1;
-    supply.obtained = true;
-
-    this.supplies.create(supply).subscribe();
-
-    this.supplies.getAll().subscribe(supplies => {
-      console.log(supplies);
-    });
 
     this.user$.pipe(
       filter((user) => !user.isSet),

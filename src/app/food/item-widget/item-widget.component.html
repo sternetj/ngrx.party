@@ -4,18 +4,18 @@
       <mat-card style="margin: 20px;">
         <div style="display: flex;">
           <div style="flex: 1 1 auto;">
-            <h2 mat-card-header>{{supply.name}}</h2>
+            <h2 mat-card-header>{{food.name}}</h2>
             <div style="display: flex;">
               <p style="flex: 1 1 auto;">
-                {{supply.description}}
+                {{food.description}}
               </p>
             </div>
             <div style="display: flex; align-items: center">
-              <app-user-icon *ngFor="let user of supply.users" [logo]="user.logo" [matTooltip]="user.name" matTooltipPosition="below"></app-user-icon>
+              <app-user-icon *ngFor="let user of food.users" [logo]="user.logo" [matTooltip]="user.name" matTooltipPosition="below"></app-user-icon>
             </div>
           </div>
           <div style="display: flex; flex-direction: column; justify-content: center;">
-            <div *ngIf="!supply.obtained; else complete" >
+            <div *ngIf="!food.obtained; else complete" >
               <div style="align-self: flex-end">{{remaining}} Remaining</div>
               <button mat-raised-button color="accent">I'll Bring It</button>
             </div>

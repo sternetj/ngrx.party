@@ -1,28 +1,71 @@
 const express = require('express');
 const app = express();
+const wsocket = require('express-ws')(app);
 const parser = require('body-parser');
+
+const uuid = require('uuid/v4');
+
+// const webSocket = require('ws');
+// const wss = new webSocket.Server({server: app});
+
+// wss.on('connection', (ws, req) => {
+//     console.log("Connected.")
+
+//     ws.on('message', () => {
+//         console.log("message");
+//     });
+
+//     ws.send("thing")
+// })
 
 const fs = require('fs');
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000
 
 app.use(parser.json());
 app.use(express.static('dist'));
 
-const loki = require('lokijs');
-const db = new loki('db.js');
+const sockets = [];
 
-var supplies = db.addCollection('supplies');
+var food = require('./food');
 
-app.get('/', (req, res) => fs.createReadStream('dist/index.html').pipe(res));
+app.use('/api/food', food.router);
 
-app.get('/supplies', (req, res) => {
-    res.send(supplies.find());
+app.ws('/', (ws, req) => {
+    const id = uuid();
+
+    sockets.push({
+        id: id,
+        socket: ws
+    });
+    console.log("connected:", id)
+
+    ws.send({
+        action: "ID",
+        payload: {
+            id: id,
+        }
+    });
+
+    ws.on('message', (msg) => {
+        console.log(msg);
+    });
+
+    ws.on('close', function(msg) {
+        console.log("clearing socket", id)
+        sockets = sockets.filter((conn) => conn.id !== id);
+    });
 });
 
-app.post('/supplies', (req, res) => {
-    const id = supplies.insert(req.body).$loki;
-    res.send(id);
-})
+food.emitter.on('food', (data) => {
+    const package = {
+        data,
+        type: 'food',
+    }
+    console.log(sockets)
+    sockets.forEach((sock) => sock.socket.send(JSON.stringify(package)));
+});
+
+app.get('/', (req, res) => fs.createReadStream('dist/index.html').pipe(res));
 
 app.listen(port, () => console.log(`Server running: PORT ${port}`))

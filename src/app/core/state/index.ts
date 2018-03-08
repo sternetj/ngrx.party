@@ -1,19 +1,25 @@
 import { ActionReducerMap, createSelector } from '@ngrx/store';
 
 import * as user from './user/user.reducer';
-import * as supplies from './supplies/supplies.reducer';
+import * as food from './food/food.reducer';
+
+import { FoodEffects } from './food/food.effects';
 
 export interface AppState {
   user: user.State;
-  supplies: supplies.State;
+  food: food.State;
 }
 
 export const reducers: ActionReducerMap<any> = {
   user: user.reducer,
-  supplies: supplies.reducer
+  food: food.reducer
 };
+
+export const effects = [
+  FoodEffects
+];
 
 export const selectAppState = (state: AppState) => state;
 export const selectUser = createSelector(selectAppState, (state: AppState) => state.user);
-export const selectSupplies = createSelector(selectAppState, (state: AppState) => state.supplies);
-export const selectFood = createSelector(selectSupplies, (state: supplies.State) => state.food);
+export const selectSupplies = createSelector(selectAppState, (state: AppState) => state.food);
+export const selectFood = createSelector(selectSupplies, (state: food.State) => state.food);

@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, ChangeDetectionStrategy } from '@angular/core';
-import { Supply } from '../../shared/models/supply';
+import { Food } from '../../shared/models/food';
 
 @Component({
   selector: 'app-item-widget',
@@ -8,10 +8,11 @@ import { Supply } from '../../shared/models/supply';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ItemWidgetComponent implements OnChanges {
-  @Input() public supply: Supply;
+  @Input() public food: Food;
   public remaining: number;
 
   public ngOnChanges(): void {
-    this.remaining = this.supply.count - this.supply.users.length;
+    console.log(this.food);
+    this.remaining = this.food.count - this.food.users.length;
   }
 }

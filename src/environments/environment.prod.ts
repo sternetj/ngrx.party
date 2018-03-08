@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  food: []
+  websocketEndpoint: window.location.host,
 };

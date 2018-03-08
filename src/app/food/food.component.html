@@ -5,8 +5,8 @@
     </div>
   </div>
   <div class="row" style="display: block">
-    <div class="col-xs-12" *ngFor="let supply of food$ | async">
-      <app-item-widget [supply]="supply"></app-item-widget>
+    <div class="col-xs-12" *ngFor="let food of food$ | async">
+      <app-item-widget [food]="food"></app-item-widget>
     </div>
   </div>
 </div>

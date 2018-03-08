@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { Supply } from '../../app/shared/models/supply';
+import { Food } from '../../app/shared/models/food';
 
 
 @Component({
@@ -7,5 +7,5 @@ import { Supply } from '../../app/shared/models/supply';
   template: '',
 })
 export class CreateFoodStubComponent {
-  @Output() private addItem = new EventEmitter<{supply: Supply, willBring: boolean}>();
+  @Output() private addItem = new EventEmitter<{food: Food, willBring: boolean}>();
 }

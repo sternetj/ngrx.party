@@ -3,7 +3,7 @@ import { MatTooltipModule, MatIconModule, MatCardModule } from '@angular/materia
 
 import { ItemWidgetComponent } from './item-widget.component';
 import { TestModule } from '../../../test/test.module';
-import { Supply } from '../../shared/models/supply';
+import { Food } from '../../shared/models/food';
 
 describe('ItemWidgetComponent', () => {
   let component: ItemWidgetComponent;
@@ -21,7 +21,7 @@ describe('ItemWidgetComponent', () => {
     fixture = TestBed.createComponent(ItemWidgetComponent);
     component = fixture.componentInstance;
 
-    component.supply = new Supply();
+    component.food = new Food();
 
     fixture.detectChanges();
   });

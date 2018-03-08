@@ -8,6 +8,7 @@
     "go": "npm run build && node ./server/server.js",
     "lint": "ng lint --format codeFrame --type-check true",
     "ng": "ng",
+    "dev": "ng serve --proxy-config proxy.conf.json",
     "postinstall": "npm run build",
     "serve": "node ./server/server.js",
     "start": "ng serve",
@@ -36,9 +37,12 @@
     "bootstrap-css-only": "^4.0.0",
     "core-js": "^2.4.1",
     "express": "^4.16.2",
+    "express-ws": "^3.0.0",
     "lokijs": "^1.5.1",
     "rxjs": "^5.5.6",
-    "typescript": "~2.5.3",
+    "typescript": "2.6.2",
+    "uuid": "^3.2.1",
+    "ws": "^4.1.0",
     "zone.js": "^0.8.19"
   },
   "devDependencies": {

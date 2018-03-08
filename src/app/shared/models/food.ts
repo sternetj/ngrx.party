@@ -1,5 +1,5 @@
-export class Supply {
-    public id: number;
+export class Food {
+    public id: string;
     public name: string;
     public count: number;
     public obtained: boolean;

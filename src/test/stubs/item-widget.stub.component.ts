@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { Supply } from '../../app/shared/models/supply';
+import { Food } from '../../app/shared/models/food';
 
 @Component({
   selector: 'app-item-widget',
   template: ''
 })
 export class ItemWidgetStubComponent {
-  @Input() public supply: Supply;
+  @Input() public food: Food;
 }
