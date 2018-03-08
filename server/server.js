@@ -29,7 +29,7 @@ const sockets = [];
 
 var food = require('./food');
 
-app.use('/food', food.router);
+app.use('/api/food', food.router);
 
 app.ws('/', (ws, req) => {
     const id = uuid();
@@ -50,7 +50,7 @@ app.ws('/', (ws, req) => {
     ws.on('message', (msg) => {
         console.log(msg);
     });
-    
+
     ws.on('close', function(msg) {
         console.log("clearing socket", id)
         sockets = sockets.filter((conn) => conn.id !== id);

@@ -6,7 +6,6 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { filter, take } from 'rxjs/operators';
 
-import { FoodService } from './shared/services/food.service';
 import { Food } from './shared/models/food';
 import { WelcomeModalComponent } from './core/welcome-modal/welcome-modal.component';
 import { AppState, selectUser } from './core/state';
@@ -42,8 +41,7 @@ export class AppComponent implements OnInit {
     // }
   ];
 
-  constructor(private foodService: FoodService,
-    private store: Store<AppState>,
+  constructor(private store: Store<AppState>,
     private wsService: WebSocketService,
     private dialog: MatDialog) {}
 

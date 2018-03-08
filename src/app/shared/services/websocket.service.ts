@@ -12,6 +12,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../core/state';
 
 import { SetFood } from '../../core/state/food/food.actions';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class WebSocketService {
@@ -35,7 +36,7 @@ export class WebSocketService {
     }
 
     constructor(private store: Store<AppState>) {
-        this.wsSocket = this.connect('ws://localhost:3000');
+        this.wsSocket = this.connect('ws://' + environment.websocketEndpoint);
 
         this.wsSocket.pipe(
             filter(message => !!message),

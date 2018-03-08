@@ -12,7 +12,7 @@ export class ItemWidgetComponent implements OnChanges {
   public remaining: number;
 
   public ngOnChanges(): void {
-    console.log(this.food)
+    console.log(this.food);
     this.remaining = this.food.count - this.food.users.length;
   }
 }

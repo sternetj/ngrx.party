@@ -7,9 +7,6 @@ import { Store } from '@ngrx/store';
 import { Food } from '../shared/models/food';
 import { State } from '../core/state/user/user.reducer';
 
-// Remove
-import { FoodService } from '../shared/services/food.service';
-
 @Component({
   selector: 'app-food',
   templateUrl: './food.component.html',
@@ -18,7 +15,7 @@ import { FoodService } from '../shared/services/food.service';
 export class FoodComponent implements OnInit {
   public food$: Observable<Food[]>;
 
-  constructor(private store: Store<AppState>, private foodService: FoodService) { }
+  constructor(private store: Store<AppState>) { }
 
   public ngOnInit() {
     this.food$ = this.store.select(selectFood);

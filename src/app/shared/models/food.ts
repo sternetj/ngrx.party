@@ -1,5 +1,5 @@
 export class Food {
-    public id: number;
+    public id: string;
     public name: string;
     public count: number;
     public obtained: boolean;

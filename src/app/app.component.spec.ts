@@ -7,11 +7,11 @@ import 'rxjs/add/observable/never';
 
 import { TestModule } from '../test/test.module';
 
-import { FoodService } from './shared/services/food.service';
 import { Food } from './shared/models/food';
 import { StoreModule } from '@ngrx/store';
 import { MatDialogModule, MatTabsModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
+import { WebSocketService } from './shared/services/websocket.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -28,11 +28,8 @@ describe('AppComponent', () => {
       ],
       providers: [
         {
-          provide: FoodService,
-          useValue: {
-            create: (food: Food) => Observable.never(),
-            getAll: () => Observable.never(),
-          },
+          provide: WebSocketService,
+          useValue: {},
         }
       ]
     }).compileComponents();
@@ -43,15 +40,4 @@ describe('AppComponent', () => {
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));
-
-  it('should call food service', async(() => inject([FoodService], (svc) => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const createSpy = spyOn(svc, 'create');
-    const getSpy = spyOn(svc, 'getAll');
-
-    fixture.detectChanges();
-
-    expect(createSpy).toHaveBeenCalled();
-    expect(getSpy).toHaveBeenCalled();
-  })));
 });

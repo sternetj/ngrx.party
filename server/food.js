@@ -4,9 +4,10 @@ var router = express.Router();
 var events = require('events');
 
 var emitter = new events.EventEmitter();
+const uuid = require('uuid/v4');
 
 var food = [{
-    id: 1,
+    id: uuid(),
     name: 'Nachos',
     description: 'Nachos smothered in cheese and jalepenos!',
     obtained: true,
@@ -16,7 +17,7 @@ var food = [{
       logo: '//ssl.gstatic.com/docs/common/profile/bat_lg.png'
     }]
   }, {
-    id: 2,
+    id: uuid(),
     name: 'Paper Plates',
     description: 'Need something to put all this food on.',
     obtained: false,
@@ -29,7 +30,7 @@ var food = [{
       logo: '//ssl.gstatic.com/docs/common/profile/panda_lg.png'
     }]
   }, {
-    id: 3,
+    id: uuid(),
     name: '2-Liters of Soda',
     description: 'Coca-Cola, Sprite, Diet Coke, Dr. Pepper, Barq\'s Root Beer, and Mountain Dew',
     obtained: false,
@@ -55,7 +56,7 @@ router.get('/', (req, res) => res.send(food));
 
 router.get('/:id', (req, res) => {
 
-    var current = food.find(f => f.id == req.params.id) || {};
+    var current = food.find(f => f.id == req.params.id);
 
     if (!current) {
         res.status(404).end();
@@ -68,9 +69,10 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     var newFood = req.body;
 
-    newFood.id = Math.max(0, ...food.map(f => f.id)) + 1;
-
-    food.push(newFood);
+    food.push({
+      ...newFood,
+      id: uuid(),
+    });
 
     emitter.emit('food', food);
 
@@ -78,9 +80,9 @@ router.post('/', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-    
+
     var currentIndex = food.findIndex(f => f.id == req.params.id);
- 
+
     if (currentIndex === -1) {
         res.status(404).end();
         return;
