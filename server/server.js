@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const wsocket = require('express-ws')(app);
@@ -20,52 +21,92 @@ const uuid = require('uuid/v4');
 
 const fs = require('fs');
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3000;
 
 app.use(parser.json());
 app.use(express.static('dist'));
 
-const sockets = [];
+let sockets = [];
 
 var food = require('./food');
 
 app.use('/api/food', food.router);
 
+var songs = require('./songs');
+app.use('/api/songs', songs.router);
+
 app.ws('/', (ws, req) => {
-    const id = uuid();
+  const id = uuid();
 
-    sockets.push({
-        id: id,
-        socket: ws
-    });
-    console.log("connected:", id)
+  sockets.push({
+    id: id,
+    socket: ws
+  });
+  console.log('connected:', id);
 
-    ws.send({
-        action: "ID",
-        payload: {
-            id: id,
-        }
-    });
+  ws.send({
+    action: 'ID',
+    payload: {
+      id: id
+    }
+  });
 
-    ws.on('message', (msg) => {
-        console.log(msg);
-    });
+  ws.on('message', msg => {
+    console.log(msg);
+  });
 
-    ws.on('close', function(msg) {
-        console.log("clearing socket", id)
-        sockets = sockets.filter((conn) => conn.id !== id);
-    });
+  ws.on('close', function(msg) {
+    console.log('clearing socket', id);
+    clearInterval(keepAliveTimer);
+    sockets = sockets.filter(conn => conn.id !== id);
+  });
+
+  const keepAliveTimer = setInterval(() => {
+    ws.send(
+      JSON.stringify({
+        type: 'KEEP_ALIVE'
+      })
+    );
+  }, 15000);
 });
 
-food.emitter.on('food', (data) => {
-    const package = {
-        data,
-        type: 'food',
-    }
-    console.log(sockets)
-    sockets.forEach((sock) => sock.socket.send(JSON.stringify(package)));
+const clearClosedSockets = () => {
+  sockets = sockets.filter(
+    sock => sock.readyState === sock.OPEN || sock.CONNECTING
+  );
+};
+
+food.emitter.on('food', data => {
+  const package = {
+    data,
+    type: 'food'
+  };
+
+  clearClosedSockets();
+  console.log(sockets);
+  sockets
+    .filter(sock => sock.readyState === sock.OPEN)
+    .forEach(sock => sock.socket.send(JSON.stringify(package)));
+});
+
+songs.emitter.on('song', data => {
+  const package = {
+    data,
+    type: 'song'
+  };
+
+  clearClosedSockets();
+  sockets
+    .filter(sock => sock.readyState === sock.OPEN)
+    .forEach(sock => {
+      try {
+        sock.socket.send(JSON.stringify(package));
+      } catch (ex) {
+        console.log(ex);
+      }
+    });
 });
 
 app.get('/', (req, res) => fs.createReadStream('dist/index.html').pipe(res));
 
-app.listen(port, () => console.log(`Server running: PORT ${port}`))
+app.listen(port, () => console.log(`Server running: PORT ${port}`));

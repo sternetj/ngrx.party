@@ -11,6 +11,7 @@ import { WelcomeModalComponent } from './welcome-modal/welcome-modal.component';
 import { reducers, effects } from './state';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './register/register.component';
+import { SongService } from '../shared/services/songs.service';
 
 @NgModule({
     imports: [
@@ -25,6 +26,7 @@ import { RegisterComponent } from './register/register.component';
     ],
     providers: [
       FoodService,
+      SongService,
       WebSocketService,
     ],
     declarations: [WelcomeModalComponent, RegisterComponent],

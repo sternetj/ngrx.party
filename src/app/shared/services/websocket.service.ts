@@ -3,16 +3,18 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 
-import { filter, map } from 'rxjs/operators';
+import { filter, map, debounceTime } from 'rxjs/operators';
 
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/timer';
 
 import { Store } from '@ngrx/store';
 import { AppState } from '../../core/state';
 
 import { SetFood } from '../../core/state/food/food.actions';
 import { environment } from '../../../environments/environment';
+import { SetAddedSongs } from '../../core/state/songs/songs.actions';
 
 @Injectable()
 export class WebSocketService {
@@ -35,22 +37,40 @@ export class WebSocketService {
         });
     }
 
+    public disconnect() {
+      this.subject.complete();
+    }
+
     constructor(private store: Store<AppState>) {
         this.wsSocket = this.connect('ws://' + environment.websocketEndpoint);
 
-        this.wsSocket.pipe(
-            filter(message => !!message),
+        const incomingMessage$ = this.wsSocket.pipe(
+            filter((message) => !!message),
             map((message: any) => message.data),
-            map((data: any) => JSON.parse(data).data)
-        ).subscribe((data) => {
-            this.store.dispatch(new SetFood(data));
+            map((data: any) => JSON.parse(data)),
+        );
+
+        incomingMessage$.pipe(
+          filter((message: {type: string}) => message.type === 'food')
+        ).subscribe((message) => {
+            this.store.dispatch(new SetFood(message.data));
+        });
+
+        incomingMessage$.pipe(
+          filter((message: {type: string}) => message.type === 'song')
+        ).subscribe((message) => {
+            this.store.dispatch(new SetAddedSongs(message.data));
+        });
+
+        Observable.timer(0, 15000).subscribe(() => {
+          this.update('KEEP_ALIVE', null);
         });
     }
 
     private create(url): Subject<MessageEvent> {
         const ws = new WebSocket(url);
 
-        const observable = Observable.create((obs: Observer<MessageEvent>) => {
+        const observable: Observable<any> = Observable.create((obs: Observer<MessageEvent>) => {
             ws.onmessage = obs.next.bind(obs);
             ws.onerror = obs.error.bind(obs);
             ws.onclose = obs.complete.bind(obs);

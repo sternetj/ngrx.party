@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <div class="row" style="display: block">
+    <div class="col-xs-12">
+      <app-song-search
+        [searchText]="search$ | async"
+        (searchChange)="searchChanged($event)"
+        (clearSearch)="clearSearch()"></app-song-search>
+    </div>
+  </div>
+  <div class="row" style="display: block">
+    <div class="col-xs-12">
+      <ng-container *ngIf="isSearching$ | async; else results">
+        <div style="display: flex; justify-content: center; align-items: center; padding: 60px;">
+          <mat-spinner></mat-spinner>
+        </div>
+      </ng-container>
+    </div>
+    <ng-template #results>
+      <ng-container *ngIf="searchResults$ | async as searchResults; else currentSongs">
+        <ng-container *ngIf="searchResults?.length > 0; else currentSongs">
+          <app-search-result *ngFor="let song of searchResults"
+            style="margin-bottom: 20px; display: block"
+            [song]="song"
+            (songAdded)="addSong($event)"></app-search-result>
+        </ng-container>
+      </ng-container>
+    </ng-template>
+    <ng-template #currentSongs>
+      <app-song-tile *ngFor="let song of addedSongs$ | async"
+        style="margin-bottom: 20px; display: block"
+        [song]="song"></app-song-tile>
+    </ng-template>
+    <!-- <div class="col-xs-12">
+        <iframe *ngIf="url" id="ytplayer" type="text/html" width="100%" height="500px"
+        [src]="url"
+        frameborder="0"></iframe>
+    </div> -->
+  </div>
+</div>
