@@ -27,10 +27,10 @@ export class AppComponent implements OnInit {
       path: '/',
       label: 'Home',
     },
-    // {
-    //   path: '/videos',
-    //   lable: 'Food',
-    // },
+    {
+      path: '/songs',
+      label: 'Songs',
+    },
     {
       path: '/food',
       label: 'Food',

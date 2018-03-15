@@ -1,0 +1,5 @@
+<app-song-tile [song]="song">
+  <button mat-raised-button color="accent" (click)="songAdded.emit(song)">
+    <mat-icon>check</mat-icon> Add Song
+  </button>
+</app-song-tile>

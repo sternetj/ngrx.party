@@ -8,11 +8,12 @@ const routes: Routes = [
     loadChildren: './food/food.module#FoodModule'
   },
   // {
-  //   path: 'games'
-  // },
-  // {
-  //   path: 'videos'
-  // },
+    //   path: 'games'
+    // },
+    {
+      path: 'songs',
+      loadChildren: './songs/songs.module#SongsModule'
+  },
   {
     path: '',
     pathMatch: 'full',

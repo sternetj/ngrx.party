@@ -1,0 +1,9 @@
+<div style="display: flex; padding: 20px">
+  <mat-form-field style="flex: 1 1 auto; margin-right: 15px;">
+    <input #search name="query" matInput type="search" placeholder="Search to add a Song"
+    [ngModel]="searchText"
+    (ngModelChange)="searchChange.emit(search.value)" />
+  </mat-form-field>
+  <button mat-button color="primary" (click)="clearSearch.emit()">Clear Search</button>
+</div>
+<mat-divider></mat-divider>
