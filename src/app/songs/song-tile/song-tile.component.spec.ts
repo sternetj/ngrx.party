@@ -1,6 +1,9 @@
+import { TestModule } from './../../../test/test.module';
+import { MatCardModule } from '@angular/material';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SongTileComponent } from './song-tile.component';
+import { Song } from '../../shared/models/song';
 
 describe('SongTileComponent', () => {
   let component: SongTileComponent;
@@ -8,7 +11,8 @@ describe('SongTileComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SongTileComponent ]
+      declarations: [ SongTileComponent ],
+      imports: [MatCardModule, TestModule]
     })
     .compileComponents();
   }));
@@ -16,6 +20,7 @@ describe('SongTileComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SongTileComponent);
     component = fixture.componentInstance;
+    component.song = new Song();
     fixture.detectChanges();
   });
 

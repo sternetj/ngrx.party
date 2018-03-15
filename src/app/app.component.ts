@@ -56,8 +56,6 @@ export class AppComponent implements OnInit {
     });
 
     window.onbeforeunload = () => {
-      this.wsService.disconnect();
-
       this.user$.pipe(take(1)).subscribe((user) => {
         window.localStorage.setItem('user-info', JSON.stringify(user));
       });

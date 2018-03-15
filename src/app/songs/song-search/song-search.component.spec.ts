@@ -1,6 +1,8 @@
+import { MatIconModule, MatDividerModule, MatFormFieldModule, MatButtonModule, MatInputModule } from '@angular/material';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SongSearchComponent } from './song-search.component';
+import { TestModule } from '../../../test/test.module';
 
 describe('SongSearchComponent', () => {
   let component: SongSearchComponent;
@@ -8,7 +10,8 @@ describe('SongSearchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SongSearchComponent ]
+      declarations: [ SongSearchComponent ],
+      imports: [TestModule, MatIconModule, MatDividerModule, MatFormFieldModule, MatButtonModule, MatInputModule]
     })
     .compileComponents();
   }));

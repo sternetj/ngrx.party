@@ -57,17 +57,8 @@ app.ws('/', (ws, req) => {
 
   ws.on('close', function(msg) {
     console.log('clearing socket', id);
-    clearInterval(keepAliveTimer);
     sockets = sockets.filter(conn => conn.id !== id);
   });
-
-  const keepAliveTimer = setInterval(() => {
-    ws.send(
-      JSON.stringify({
-        type: 'KEEP_ALIVE'
-      })
-    );
-  }, 15000);
 });
 
 const clearClosedSockets = () => {
@@ -76,17 +67,30 @@ const clearClosedSockets = () => {
   );
 };
 
+const notifySockets = (data) => {
+  clearClosedSockets();
+  const closedSockets = [];
+
+  sockets
+    .filter(sock => sock.readyState === sock.OPEN)
+    .forEach(sock => {
+      try {
+        sock.socket.send(JSON.stringify(data));
+      } catch (ex) {
+        closedSockets.push(sock.id);
+      }
+    });
+
+  sockets = sockets.filter((sock) => closedSockets.indexOf(sock.id) > -1);
+}
+
 food.emitter.on('food', data => {
   const package = {
     data,
     type: 'food'
   };
 
-  clearClosedSockets();
-  console.log(sockets);
-  sockets
-    .filter(sock => sock.readyState === sock.OPEN)
-    .forEach(sock => sock.socket.send(JSON.stringify(package)));
+  notifySockets(package);
 });
 
 songs.emitter.on('song', data => {
@@ -95,16 +99,7 @@ songs.emitter.on('song', data => {
     type: 'song'
   };
 
-  clearClosedSockets();
-  sockets
-    .filter(sock => sock.readyState === sock.OPEN)
-    .forEach(sock => {
-      try {
-        sock.socket.send(JSON.stringify(package));
-      } catch (ex) {
-        console.log(ex);
-      }
-    });
+  notifySockets(package);
 });
 
 app.get('/', (req, res) => fs.createReadStream('dist/index.html').pipe(res));

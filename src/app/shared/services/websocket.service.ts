@@ -37,10 +37,6 @@ export class WebSocketService {
         });
     }
 
-    public disconnect() {
-      this.subject.complete();
-    }
-
     constructor(private store: Store<AppState>) {
         this.wsSocket = this.connect('ws://' + environment.websocketEndpoint);
 
