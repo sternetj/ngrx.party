@@ -38,6 +38,11 @@ app.use('/api/songs', songs.router);
 app.ws('/', (ws, req) => {
   const id = uuid();
 
+  ws.destroy = ws.onclose = function(msg) {
+    console.log('clearing socket', id);
+    sockets = sockets.filter(conn => conn.id !== id);
+  };
+
   sockets.push({
     id: id,
     socket: ws
@@ -55,33 +60,18 @@ app.ws('/', (ws, req) => {
     console.log(msg);
   });
 
-  ws.on('close', function(msg) {
-    console.log('clearing socket', id);
-    sockets = sockets.filter(conn => conn.id !== id);
-  });
 });
 
-const clearClosedSockets = () => {
-  sockets = sockets.filter(
-    sock => sock.readyState === sock.OPEN || sock.CONNECTING
-  );
-};
-
 const notifySockets = (data) => {
-  clearClosedSockets();
-  const closedSockets = [];
-
   sockets
     .filter(sock => sock.readyState === sock.OPEN)
     .forEach(sock => {
       try {
         sock.socket.send(JSON.stringify(data));
       } catch (ex) {
-        closedSockets.push(sock.id);
+        sock.socket.destroy();
       }
     });
-
-  sockets = sockets.filter((sock) => closedSockets.indexOf(sock.id) > -1);
 }
 
 food.emitter.on('food', data => {
