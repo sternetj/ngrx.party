@@ -1,4 +1,4 @@
-import { SetFood, GetFood, AddFood } from './../core/state/food/food.actions';
+import { SetFood, GetFood, AddFood, CreateFood, UpdateFood } from './../core/state/food/food.actions';
 import { take } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import { AppState, selectFood, selectUser } from './../core/state/index';
@@ -15,22 +15,39 @@ import { State } from '../core/state/user/user.reducer';
 export class FoodComponent implements OnInit {
   public food$: Observable<Food[]>;
 
+  public currentUser: State;
+
   constructor(private store: Store<AppState>) { }
 
   public ngOnInit() {
     this.food$ = this.store.select(selectFood);
+
+    this.store.select(selectUser).pipe(take(1)).subscribe((user) => this.currentUser = user);
 
     this.store.dispatch(new GetFood());
   }
 
   public addFood(event: {food: Food, willBring: boolean}) {
     if (event.willBring) {
-      let currentUser: State;
-      this.store.select(selectUser).pipe(take(1)).subscribe((user) => currentUser = user);
-
-      event.food.users.push(currentUser);
+      event.food.users.push(this.currentUser);
     }
 
-    this.store.dispatch(new AddFood(event.food));
+    this.store.dispatch(new CreateFood(event.food));
+  }
+
+  public updateFood(food: Food) {
+    const newFood = {
+      ...food,
+      users: [
+        ...food.users,
+        this.currentUser,
+      ]
+    }
+
+    this.store.dispatch(new UpdateFood(newFood));
+  }
+
+  public isUserBringing(food: Food) {
+    return food.users.some((user) => user.name === this.currentUser.name);
   }
 }

@@ -24,6 +24,18 @@ export function reducer (state: State = defaultState, action: actions.Actions) {
         food: [...state.food, action.food],
       };
     }
+    case actions.UPDATE_FOOD: {
+      const updateFoodIndex = state.food.findIndex(f => f.id === action.food.id);
+
+      const newFood = [...state.food];
+
+      newFood[updateFoodIndex] = action.food;
+
+      return {
+        ...state,
+        food: newFood,
+      };
+    }
     default: {
       return state;
     }

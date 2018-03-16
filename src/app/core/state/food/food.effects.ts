@@ -7,7 +7,7 @@ import { catchError, map, exhaustMap, tap } from 'rxjs/operators';
 
 import { FoodService } from '../../../shared/services/food.service';
 
-import { GET_FOOD, ADD_FOOD, AddFood, SetFood } from './food.actions';
+import { GET_FOOD, ADD_FOOD, UPDATE_FOOD, AddFood, SetFood, UpdateFood, CREATE_FOOD } from './food.actions';
 import { WebSocketService } from '../../../shared/services/websocket.service';
 
 @Injectable()
@@ -22,11 +22,19 @@ export class FoodEffects {
     )
   );
 
-  @Effect({dispatch: false}) add$: Observable<Action> = this.actions$.pipe(
-    ofType(ADD_FOOD),
+  @Effect() add$: Observable<Action> = this.actions$.pipe(
+    ofType(CREATE_FOOD),
     exhaustMap((action: AddFood) =>
       this.foodService.create(action.food).pipe(
         map(data => new AddFood(data)),
+    ))
+  );
+
+  @Effect() update$: Observable<Action> = this.actions$.pipe(
+    ofType(UPDATE_FOOD),
+    exhaustMap((action: UpdateFood) =>
+      this.foodService.update(action.food).pipe(
+        map(data => new UpdateFood(data)),
     ))
   );
 

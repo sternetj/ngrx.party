@@ -21,9 +21,9 @@ export class FoodService {
         return this.http.post<Food>(`/api/food`, food);
     }
 
-    // public update(food: Food) {
-    //     return this.http.put<Food>(`/api/food`, food);
-    // }
+    public update(food: Food) {
+        return this.http.put<Food>(`/api/food`, food);
+    }
 
     public remove(id: number) {
         return this.http.delete<Food>(`/api/food/${id}`);

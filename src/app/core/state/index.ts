@@ -24,6 +24,8 @@ export const effects = [
   SongsEffects,
 ];
 
+export { foodSelectors } from './food/food.selectors';
+
 export const selectAppState = (state: AppState) => state;
 export const selectUser = createSelector(selectAppState, (state: AppState) => state.user);
 export const selectSupplies = createSelector(selectAppState, (state: AppState) => state.food);

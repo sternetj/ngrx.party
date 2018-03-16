@@ -79,6 +79,24 @@ router.post('/', (req, res) => {
     res.send(newFood);
 });
 
+router.put('/', (req, res) => {
+
+  var currentIndex = food.findIndex(f => f.id == req.body.id);
+
+  if (currentIndex === -1) {
+      res.status(404).end();
+      return;
+  }
+
+  food.splice(currentIndex, 1, req.body);
+
+  console.log(food)
+
+  emitter.emit('food', food);
+
+  res.send(food);
+});
+
 router.delete('/:id', (req, res) => {
 
     var currentIndex = food.findIndex(f => f.id == req.params.id);
@@ -89,6 +107,8 @@ router.delete('/:id', (req, res) => {
     }
 
     food.splice(currentIndex, 1);
+
+    emitter.emit('food', food);
 
     res.status(200).end();
 });
