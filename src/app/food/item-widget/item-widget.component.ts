@@ -15,9 +15,13 @@ export class ItemWidgetComponent implements OnChanges {
   @Output() public bringingFood = new EventEmitter();
 
   public remaining: number;
+  public buttonText = 'I\'ll Bring It!';
 
   public ngOnChanges() {
-    console.log(this.food);
     this.remaining = this.food.count - this.food.users.length;
+
+    if (this.bringDisabled) {
+      this.buttonText = 'Consider it brought!';
+    }
   }
 }

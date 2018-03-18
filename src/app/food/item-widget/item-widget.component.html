@@ -17,7 +17,7 @@
           <div style="display: flex; flex-direction: column; justify-content: center;">
             <div *ngIf="!food.obtained; else complete" >
               <div style="align-self: flex-end">{{remaining}} Remaining</div>
-              <button mat-raised-button color="accent" [disabled]="bringDisabled" (click)="bringingFood.emit()">I'll Bring It</button>
+              <button mat-raised-button color="accent" [disabled]="bringDisabled" (click)="bringingFood.emit()">{{buttonText}}</button>
             </div>
             <ng-template #complete>
               <div style="background-color: #009688; height: 80px; width: 80px; border-radius: 50px; display: flex; align-items: center; justify-content: center; color: white;">
