@@ -2,23 +2,23 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { MatExpansionModule, MatInputModule, MatButtonModule, MatCheckboxModule } from '@angular/material';
 
-import { CreateFoodComponent } from './create-food.component';
+import { CreateGameComponent } from './create-game.component';
 import { TestModule } from '../../../test/test.module';
 
-describe('CreateFoodComponent', () => {
-  let component: CreateFoodComponent;
-  let fixture: ComponentFixture<CreateFoodComponent>;
+describe('CreateGameComponent', () => {
+  let component: CreateGameComponent;
+  let fixture: ComponentFixture<CreateGameComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateFoodComponent ],
+      declarations: [ CreateGameComponent ],
       imports: [FormsModule, MatExpansionModule, MatInputModule, MatButtonModule, MatCheckboxModule, TestModule]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateFoodComponent);
+    fixture = TestBed.createComponent(CreateGameComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,27 +1,28 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatTooltipModule, MatIconModule, MatCardModule } from '@angular/material';
 
-import { ItemWidgetComponent } from './item-widget.component';
+import { GameWidgetComponent } from './game-widget.component';
 import { TestModule } from '../../../test/test.module';
-import { Food } from '../../shared/models/food';
+import { Game } from '../../shared/models/game';
 
-describe('ItemWidgetComponent', () => {
-  let component: ItemWidgetComponent;
-  let fixture: ComponentFixture<ItemWidgetComponent>;
+describe('GameWidgetComponent', () => {
+  let component: GameWidgetComponent;
+  let fixture: ComponentFixture<GameWidgetComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ItemWidgetComponent ],
+      declarations: [ GameWidgetComponent ],
       imports: [TestModule, MatTooltipModule, MatIconModule, MatCardModule]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ItemWidgetComponent);
+    fixture = TestBed.createComponent(GameWidgetComponent);
     component = fixture.componentInstance;
 
-    component.food = new Food();
+    component.game = new Game();
+    component.game.user = { name: 'test', logo: '' };
 
     fixture.detectChanges();
   });

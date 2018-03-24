@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { Food } from '../../app/shared/models/food';
 
 @Component({
@@ -7,4 +7,6 @@ import { Food } from '../../app/shared/models/food';
 })
 export class ItemWidgetStubComponent {
   @Input() public food: Food;
+  @Input() public bringDisabled: boolean;
+  @Output() public bringingFood = new EventEmitter();
 }

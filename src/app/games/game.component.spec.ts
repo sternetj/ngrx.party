@@ -4,16 +4,16 @@ import { MatCardModule } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { FoodComponent } from './food.component';
+import { GameComponent } from './game.component';
 
-describe('FoodComponent', () => {
-  let component: FoodComponent;
-  let fixture: ComponentFixture<FoodComponent>;
+describe('GameComponent', () => {
+  let component: GameComponent;
+  let fixture: ComponentFixture<GameComponent>;
 
   beforeEach(
     async(() => {
       TestBed.configureTestingModule({
-        declarations: [FoodComponent],
+        declarations: [GameComponent],
         imports: [MatCardModule, TestModule],
         providers: [
           { provide: Store, useValue: { select: () => Observable.never(), dispatch: () => Observable.never() } },
@@ -23,7 +23,7 @@ describe('FoodComponent', () => {
   );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FoodComponent);
+    fixture = TestBed.createComponent(GameComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

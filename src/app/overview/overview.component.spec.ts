@@ -2,6 +2,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OverviewComponent } from './overview.component';
 import { MatProgressBarModule, MatCardModule } from '@angular/material';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/never';
 
 describe('OverviewComponent', () => {
   let component: OverviewComponent;
@@ -11,6 +14,9 @@ describe('OverviewComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ OverviewComponent ],
       imports: [ MatCardModule, MatProgressBarModule ],
+      providers: [
+        { provide: Store, useValue: { select: () => Observable.never(), dispatch: () => Observable.never() } },
+      ]
     })
     .compileComponents();
   }));
