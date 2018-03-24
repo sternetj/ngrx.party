@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <div class="row" style="display: block">
+    <div class="col-xs-12">
+      <mat-card style="margin: 20px;">
+        <div style="display: flex;">
+          <div style="flex: 1 1 auto;">
+            <h2 mat-card-header>{{game.name}}</h2>
+            <div style="display: flex;">
+              <p style="flex: 1 1 auto;">
+                {{game.description}}
+              </p>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; justify-content: center; align-items: center">
+            <app-user-icon [logo]="game.user.logo" [size]="60"></app-user-icon>
+            <span>{{game.user.name}}</span>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

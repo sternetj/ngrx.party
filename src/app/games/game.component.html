@@ -1,0 +1,21 @@
+<div class="container-fluid">
+  <div class="row" style="display: block">
+    <div class="col-xs-12">
+      <app-create-game (addGame)="addGame($event)"></app-create-game>
+    </div>
+  </div>
+  <div class="row" style="display: block">
+    <ng-container *ngIf="games$ | async as games">
+      <ng-container *ngIf="games.length; else noGames">
+        <div class="col-xs-12" *ngFor="let game of games">
+          <app-game-widget [game]="game"></app-game-widget>
+        </div>
+      </ng-container>
+      <ng-template #noGames>
+        <div class="col-xs-12" class="text-center" style="font-size: 1.5rem">
+          There are no games yet!
+        </div>
+      </ng-template>
+    </ng-container>
+  </div>
+</div>

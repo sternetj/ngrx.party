@@ -12,6 +12,7 @@ import { reducers, effects } from './state';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './register/register.component';
 import { SongService } from '../shared/services/songs.service';
+import { GameService } from '../shared/services/game.service';
 
 @NgModule({
     imports: [
@@ -26,6 +27,7 @@ import { SongService } from '../shared/services/songs.service';
     ],
     providers: [
       FoodService,
+      GameService,
       SongService,
       WebSocketService,
     ],

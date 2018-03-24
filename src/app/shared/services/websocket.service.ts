@@ -15,6 +15,7 @@ import { AppState } from '../../core/state';
 import { SetFood } from '../../core/state/food/food.actions';
 import { environment } from '../../../environments/environment';
 import { SetAddedSongs } from '../../core/state/songs/songs.actions';
+import { SetGame } from '../../core/state/game/game.actions';
 
 @Injectable()
 export class WebSocketService {
@@ -56,6 +57,12 @@ export class WebSocketService {
           filter((message: {type: string}) => message.type === 'song')
         ).subscribe((message) => {
             this.store.dispatch(new SetAddedSongs(message.data));
+        });
+
+        incomingMessage$.pipe(
+          filter((message: {type: string}) => message.type === 'game')
+        ).subscribe((message) => {
+            this.store.dispatch(new SetGame(message.data));
         });
 
         Observable.timer(0, 15000).subscribe(() => {

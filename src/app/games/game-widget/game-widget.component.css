@@ -1,0 +1,7 @@
+app-user-icon:not(:first-of-type) {
+  margin-left: 8px;
+}
+
+app-user-icon:not(:last-of-type) {
+  margin-right: 8px;
+}

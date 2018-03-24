@@ -7,12 +7,13 @@ const routes: Routes = [
     path: 'food',
     loadChildren: './food/food.module#FoodModule'
   },
-  // {
-    //   path: 'games'
-    // },
-    {
-      path: 'songs',
-      loadChildren: './songs/songs.module#SongsModule'
+  {
+    path: 'games',
+    loadChildren: './games/game.module#GameModule'
+  },
+  {
+    path: 'songs',
+    loadChildren: './songs/songs.module#SongsModule'
   },
   {
     path: '',
