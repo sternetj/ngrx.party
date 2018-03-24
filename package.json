@@ -33,6 +33,7 @@
     "@ngrx/router-store": "^5.0.1",
     "@ngrx/store": "^5.0.0",
     "@ngrx/store-devtools": "^5.0.1",
+    "bad-words": "^1.6.1",
     "body-parser": "^1.18.2",
     "bootstrap-css-only": "^4.0.0",
     "core-js": "^2.4.1",

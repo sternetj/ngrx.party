@@ -6,18 +6,8 @@ const parser = require('body-parser');
 
 const uuid = require('uuid/v4');
 
-// const webSocket = require('ws');
-// const wss = new webSocket.Server({server: app});
-
-// wss.on('connection', (ws, req) => {
-//     console.log("Connected.")
-
-//     ws.on('message', () => {
-//         console.log("message");
-//     });
-
-//     ws.send("thing")
-// })
+const Filter = require('bad-words'),
+filter = new Filter();
 
 const fs = require('fs');
 
@@ -25,6 +15,14 @@ const port = process.env.PORT || 3000;
 
 app.use(parser.json());
 app.use(express.static('dist'));
+
+app.use((req, res, next) => {
+  if (req.body && filter.isProfane(JSON.stringify(req.body))) {
+    return res.status(400).send("Request contains bad words");
+  }
+
+  next();
+})
 
 let sockets = [];
 

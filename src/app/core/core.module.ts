@@ -9,9 +9,10 @@ import { FoodService } from '../shared/services/food.service';
 import { WebSocketService } from '../shared/services/websocket.service';
 import { WelcomeModalComponent } from './welcome-modal/welcome-modal.component';
 import { reducers, effects } from './state';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RegisterComponent } from './register/register.component';
 import { SongService } from '../shared/services/songs.service';
+import { ErrorInterceptor } from './guards/error.interceptor';
 
 @NgModule({
     imports: [
@@ -28,6 +29,11 @@ import { SongService } from '../shared/services/songs.service';
       FoodService,
       SongService,
       WebSocketService,
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: ErrorInterceptor,
+        multi: true,
+      }
     ],
     declarations: [WelcomeModalComponent, RegisterComponent],
     entryComponents: [
