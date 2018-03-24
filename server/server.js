@@ -19,7 +19,7 @@ const uuid = require('uuid/v4');
 //     });
 
 //     ws.send("thing")
-// })npm
+// })
 
 const fs = require('fs');
 
