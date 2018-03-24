@@ -2,7 +2,8 @@ require('dotenv').config();
 const http = require('http');
 const express = require('express');
 const app = express();
-const wsocket = require('express-ws')(app);
+const httpServer = http.createServer(app);
+const wsocket = require('express-ws')(app, httpServer);
 const parser = require('body-parser');
 
 const uuid = require('uuid/v4');
@@ -94,7 +95,5 @@ songs.emitter.on('song', data => {
 });
 
 app.get('/', (req, res) => fs.createReadStream('dist/index.html').pipe(res));
-
-const httpServer = http.createServer(app);
 
 httpServer.listen(port, () => console.log(`Server running: PORT ${port}`));
