@@ -5,22 +5,32 @@ import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import { Song } from '../shared/models/song';
 import { UpdateSearch, ClearSearch, AddSong, GetAllSongs } from '../core/state/songs/songs.actions';
-import { DomSanitizer } from '@angular/platform-browser';
+import { trigger, transition, query, stagger, animate, style } from '@angular/animations';
 
 @Component({
   selector: 'app-songs',
   templateUrl: './songs.component.html',
-  styleUrls: ['./songs.component.css']
+  styleUrls: ['./songs.component.css'],
+  animations: [
+    trigger('listAnimation', [
+      transition(':enter', [
+        query('app-search-result:not(:first-of-type)', style({ transform: 'translateY(-75%)' })),
+        query('app-search-result', style({ opacity: 0 })),
+        query('app-search-result', stagger('150ms', [
+          animate('300ms ease-out', style({ opacity: 1, transform: 'translateY(0%)' })),
+        ])),
+      ])
+    ])
+  ]
 })
 export class SongsComponent implements OnInit {
+  public listState: number;
   public search$: Observable<string>;
   public isSearching$: Observable<boolean>;
   public searchResults$: Observable<Song[]>;
   public addedSongs$: Observable<Song[]>;
 
-  // public url;
-
-  constructor(private store: Store<AppState>, public sanitizer: DomSanitizer) { }
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
     this.store.dispatch(new GetAllSongs());
@@ -29,14 +39,11 @@ export class SongsComponent implements OnInit {
 
     this.search$ = songState$.pipe(map((state) => state && state.search));
     this.isSearching$ = songState$.pipe(map((state) => state && state.searching));
-    this.searchResults$ = songState$.pipe(map((state) => state && state.searchResults));
+    this.searchResults$ = songState$.pipe(
+      map((state) => state && state.searchResults),
+      tap(() => this.listState = Math.random())
+    );
     this.addedSongs$ = songState$.pipe(map((state) => state && state.addedSongs));
-
-    // this.addedSongs$.subscribe((songs) => {
-    //   if (songs.length) {
-    //     this.url = this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${songs[0].id}?autoplay=1`);
-    //   }
-    // });
   }
 
   public searchChanged(search: string) {

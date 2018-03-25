@@ -16,7 +16,7 @@
           <ng-template #count>
             <span style="font-size: 24px">{{counts.bringing}} / {{counts.total}}</span>
           </ng-template>
-        </div> 
+        </div>
     </div>
     <h2 class="col-12" style="margin-top: 30px">
       Games
@@ -28,7 +28,10 @@
       Songs
     </h2>
     <div class="col-12">
-        <p class="text-center" style="font-size: 4rem; color: #3f51b5;">34</p>
+        <p class="text-center" style="font-size: 4rem; color: #3f51b5;">{{counts.songs}}</p>
+    </div>
+    <div class="col-12 text-center">
+        <button *ngIf="counts.songs;" mat-raised-button color="accent" (click)="startParty.emit()">Start the Party!</button>
     </div>
   </div>
 </mat-card>
