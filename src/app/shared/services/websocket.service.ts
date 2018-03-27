@@ -39,7 +39,8 @@ export class WebSocketService {
     }
 
     constructor(private store: Store<AppState>) {
-        this.wsSocket = this.connect('ws://' + environment.websocketEndpoint);
+        const protocol = window.location.protocol.toUpperCase() === 'HTTPS:' ? 'wss' : 'ws';
+        this.wsSocket = this.connect(`${protocol}://${environment.websocketEndpoint}`);
 
         const incomingMessage$ = this.wsSocket.pipe(
             filter((message) => !!message),

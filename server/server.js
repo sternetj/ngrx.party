@@ -1,7 +1,9 @@
 require('dotenv').config();
+const http = require('http');
 const express = require('express');
 const app = express();
-const wsocket = require('express-ws')(app);
+const httpServer = http.createServer(app);
+const wsocket = require('express-ws')(app, httpServer);
 const parser = require('body-parser');
 
 const uuid = require('uuid/v4');
@@ -105,4 +107,4 @@ games.emitter.on('game', data => {
 
 app.get('/', (req, res) => fs.createReadStream('dist/index.html').pipe(res));
 
-app.listen(port, () => console.log(`Server running: PORT ${port}`));
+httpServer.listen(port, () => console.log(`Server running: PORT ${port}`));
