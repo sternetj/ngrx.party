@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { AppState, foodSelectors } from '../core/state';
+import { AppState, foodSelectors, gameSelectors } from '../core/state';
+
+import { combineLatest } from 'rxjs/observable/combineLatest';
 
 import { Store } from '@ngrx/store';
-import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'app-overview',
@@ -11,27 +12,33 @@ import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
   styleUrls: ['./overview.component.css']
 })
 export class OverviewComponent implements OnInit, OnDestroy {
-
-  public foodCount;
+  public countsSubscription;
 
   public counts = {
-    bringing: 0,
-    total: 0,
+    food: {
+      bringing: 0,
+      total: 0,
+    },
+    games: 0,
   };
 
   public countPercentage = 0;
 
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<AppState>) {}
 
   public ngOnInit() {
-    this.foodCount = this.store.select(foodSelectors.counts)
-    .subscribe((counts) => {
-      this.counts = counts;
-      this.countPercentage = this.counts.bringing / this.counts.total * 100;
+    this.countsSubscription = combineLatest(
+      this.store.select(foodSelectors.counts),
+      this.store.select(gameSelectors.counts)
+    ).subscribe(([foodCounts, gameCounts]) => {
+      this.counts.food = foodCounts;
+      this.countPercentage = this.counts.food.bringing / this.counts.food.total * 100;
+
+      this.counts.games = gameCounts;
     });
   }
 
   public ngOnDestroy() {
-    this.foodCount.unsubscribe();
+    this.countsSubscription.unsubscribe();
   }
 }

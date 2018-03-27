@@ -35,10 +35,10 @@ export class AppComponent implements OnInit {
       path: '/food',
       label: 'Food',
     },
-    // {
-    //   path: '/games',
-    //   lable: 'Games',
-    // }
+    {
+      path: '/games',
+      label: 'Games',
+    }
   ];
 
   constructor(private store: Store<AppState>,

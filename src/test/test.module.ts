@@ -8,9 +8,13 @@ import { ItemWidgetStubComponent } from './stubs/item-widget.stub.component';
 import { SearchResultStubComponent } from './stubs/search-result.stub.component';
 import { SongTileStubComponent } from './stubs/song-tile.stub.component';
 import { SongSearchStubComponent } from './stubs/song-search.stub.component';
+import { CreateGameStubComponent } from './stubs/create-game.stub.component';
+import { GameWidgetStubComponent } from './stubs/game-widget.stub.component';
 
 const COMPONENTS = [
   CreateFoodStubComponent,
+  CreateGameStubComponent,
+  GameWidgetStubComponent,
   ItemWidgetStubComponent,
   OverviewStubComponent,
   SearchResultStubComponent,

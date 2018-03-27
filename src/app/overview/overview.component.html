@@ -12,17 +12,23 @@
     <div class="col-12">
       <mat-progress-bar mode="determinate" [value]="countPercentage"></mat-progress-bar>
         <div style="display: flex; justify-content: flex-end">
-          <button *ngIf="!counts.total; else count" mat-button color="accent" routerLink="/food">Add some food!</button>
+          <button *ngIf="!counts.food.total; else count" mat-button color="accent" routerLink="/food">Add some food!</button>
           <ng-template #count>
-            <span style="font-size: 24px">{{counts.bringing}} / {{counts.total}}</span>
+            <span style="font-size: 24px">{{counts.food.bringing}} / {{counts.food.total}}</span>
           </ng-template>
-        </div> 
+        </div>
     </div>
     <h2 class="col-12" style="margin-top: 30px">
       Games
     </h2>
     <div class="col-12">
-        <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+        <mat-progress-bar mode="determinate" [value]="counts.games * 10"></mat-progress-bar>
+        <div style="display: flex; justify-content: flex-end">
+          <button *ngIf="!counts.games; else count" mat-button color="accent" routerLink="/games">Add a Game!</button>
+          <ng-template #count>
+            <span style="font-size: 24px">{{counts.games}} / 10</span>
+          </ng-template>
+        </div>
     </div>
     <h2 class="col-12" style="margin-top: 30px">
       Songs

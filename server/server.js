@@ -29,11 +29,13 @@ app.use(express.static('dist'));
 let sockets = [];
 
 var food = require('./food');
-
 app.use('/api/food', food.router);
 
 var songs = require('./songs');
 app.use('/api/songs', songs.router);
+
+var games = require('./games');
+app.use('/api/games', games.router);
 
 app.ws('/', (ws, req) => {
   const id = uuid();
@@ -87,6 +89,15 @@ songs.emitter.on('song', data => {
   const package = {
     data,
     type: 'song'
+  };
+
+  notifySockets(package);
+});
+
+games.emitter.on('game', data => {
+  const package = {
+    data,
+    type: 'game'
   };
 
   notifySockets(package);
