@@ -16,12 +16,15 @@ import { SetFood } from '../../core/state/food/food.actions';
 import { environment } from '../../../environments/environment';
 import { SetAddedSongs } from '../../core/state/songs/songs.actions';
 import { SetGame } from '../../core/state/game/game.actions';
+import { AddNotification } from '../../core/state/notifications/notifications.actions';
+import { tap } from 'rxjs/operators/tap';
 
 @Injectable()
 export class WebSocketService {
     private subject: Subject<MessageEvent>;
 
     public wsSocket;
+    public id: string;
 
     public connect(url): Subject<MessageEvent> {
         if (!this.subject) {
@@ -46,6 +49,11 @@ export class WebSocketService {
             filter((message) => !!message),
             map((message: any) => message.data),
             map((data: any) => JSON.parse(data)),
+            tap((data: any) => {
+                if (data.type === 'id') {
+                    this.id = data.data;
+                }
+            })
         );
 
         incomingMessage$.pipe(
@@ -53,6 +61,12 @@ export class WebSocketService {
         ).subscribe((message) => {
             this.store.dispatch(new SetFood(message.data));
         });
+
+        incomingMessage$.pipe(
+            filter((message: {type: string}) => message.type === 'id')
+          ).subscribe((message) => {
+              console.log(message);
+          });
 
         incomingMessage$.pipe(
           filter((message: {type: string}) => message.type === 'song')
@@ -65,6 +79,10 @@ export class WebSocketService {
         ).subscribe((message) => {
             this.store.dispatch(new SetGame(message.data));
         });
+
+        incomingMessage$.subscribe((message) => {
+              this.store.dispatch(new AddNotification({type: message.type, user: message.user }));
+          });
 
         Observable.timer(0, 15000).subscribe(() => {
           this.update('KEEP_ALIVE', null);

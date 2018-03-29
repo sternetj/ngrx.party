@@ -10,7 +10,7 @@
     "ng": "ng",
     "dev": "ng serve --proxy-config proxy.conf.json",
     "postinstall": "npm run build",
-    "serve": "node ./server/server.js",
+    "server": "node ./server/server.js",
     "start": "ng serve",
     "test": "ng test --single-run && npm run lint"
   },

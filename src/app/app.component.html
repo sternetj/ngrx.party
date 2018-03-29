@@ -7,6 +7,9 @@
       <a mat-button>Games</a>
     </div> -->
     <div style="align-self: flex-end; display: flex; justify-content: center;align-items: center;" *ngIf="(user$ | async)?.isSet">
+      <div (click)="clearNotifications()" style="background-color: red; height: 28px; width: 28px; margin-right: 10px; border-radius: 4px; display: flex; justify-content: center">
+        <p>{{(notifications$ | async)?.length || 0}}</p>
+      </div>
       <span style="margin-right: 10px;">Welcome, {{(user$ | async)?.name}}</span>
       <app-user-icon [logo]="(user$ | async)?.logo" size="40" color="accent"></app-user-icon>
     </div>
