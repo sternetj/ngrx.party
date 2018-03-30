@@ -1,20 +1,14 @@
-<div class="mat-elevation-z6" style="position: fixed;top: 0;left: 0;right: 0;z-index: 2;">
+<div class="mat-elevation-z6" style="position: fixed;top: 0;left: 0;right: 0;z-index: 2;" *ngIf="!partyState" @partyStateHeader>
   <nav style="background-color: #3f51b5; display: flex; justify-content: flex-end; align-items: center; padding: 8px 16px; color: white">
-    <!-- <div>
-      <a mat-button>Home</a>
-      <a mat-button>Videos</a>
-      <a mat-button>Food</a>
-      <a mat-button>Games</a>
-    </div> -->
     <div style="align-self: flex-end; display: flex; justify-content: center;align-items: center;" *ngIf="(user$ | async)?.isSet">
       <span style="margin-right: 10px;">Welcome, {{(user$ | async)?.name}}</span>
       <app-user-icon [logo]="(user$ | async)?.logo" size="40" color="accent"></app-user-icon>
     </div>
   </nav>
 </div>
-<div class="container-fluid" style="margin-top: 56px">
+<div class="container-fluid" style="margin-top: 56px" @partyStartedBody  *ngIf="!partyState">
   <div class="row">
-    <div class="col-8">
+    <div class="col-8" @partyStateLeftColumn>
       <nav mat-tab-nav-bar>
         <button mat-tab-link
           mat-button
@@ -29,8 +23,12 @@
 
       <router-outlet></router-outlet>
     </div>
-    <div class="col-4">
-      <app-overview></app-overview>
+    <div class="col-4" @partyStateRightColumn>
+      <app-overview (startParty)="startParty()"></app-overview>
     </div>
   </div>
+</div>
+
+<div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -1" [@videoContainer]="partyState">
+  <div #player></div>
 </div>

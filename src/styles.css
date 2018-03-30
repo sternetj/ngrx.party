@@ -22,3 +22,7 @@
 .body-2 {
   font-weight: bold;
 }
+
+body, html {
+  overflow-x: hidden;
+}
