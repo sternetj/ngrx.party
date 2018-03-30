@@ -18,6 +18,7 @@ import { SetAddedSongs } from '../../core/state/songs/songs.actions';
 import { SetGame } from '../../core/state/game/game.actions';
 import { AddNotification } from '../../core/state/notifications/notifications.actions';
 import { tap } from 'rxjs/operators/tap';
+import { share } from 'rxjs/operators/share';
 
 @Injectable()
 export class WebSocketService {
@@ -53,11 +54,16 @@ export class WebSocketService {
                 if (data.type === 'id') {
                     this.id = data.data;
                 }
-            })
+            }),
+            share(),
         );
 
         incomingMessage$.pipe(
-          filter((message: {type: string}) => message.type === 'food')
+          filter((message: {type: string}) => {
+              console.log(message.type)
+            console.log(message.type === 'food')
+            return message.type === 'food';
+          } )
         ).subscribe((message) => {
             this.store.dispatch(new SetFood(message.data));
         });

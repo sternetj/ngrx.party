@@ -15,6 +15,7 @@ import { Subject } from 'rxjs/Subject';
 
 import { WebSocketService } from './shared/services/websocket.service';
 import { ClearNotifications } from './core/state/notifications/notifications.actions';
+import { GetFood } from './core/state/food/food.actions';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +25,8 @@ import { ClearNotifications } from './core/state/notifications/notifications.act
 export class AppComponent implements OnInit {
   public user$: Observable<State>;
   public notifications$;
+
+  public showNotifications = false;
 
   public navLinks = [
     {
@@ -53,6 +56,7 @@ export class AppComponent implements OnInit {
 
     this.notifications$ = this.store.select(notificationSelectors.notifications);
 
+
     this.user$.pipe(
       filter((user) => !user.isSet),
       take(1)
@@ -65,6 +69,8 @@ export class AppComponent implements OnInit {
         window.localStorage.setItem('user-info', JSON.stringify(user));
       });
     };
+
+    this.store.dispatch(new GetFood());
   }
 
   public clearNotifications() {
