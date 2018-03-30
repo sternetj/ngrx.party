@@ -60,8 +60,6 @@ export class WebSocketService {
 
         incomingMessage$.pipe(
           filter((message: {type: string}) => {
-              console.log(message.type)
-            console.log(message.type === 'food')
             return message.type === 'food';
           } )
         ).subscribe((message) => {

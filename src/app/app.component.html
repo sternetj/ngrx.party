@@ -1,7 +1,7 @@
 <div class="mat-elevation-z6" style="position: fixed;top: 0;left: 0;right: 0;z-index: 2;">
   <nav style="background-color: #3f51b5; display: flex; justify-content: flex-end; align-items: center; padding: 8px 16px; color: white">
     <div style="align-self: flex-end; display: flex; justify-content: center;align-items: center;" *ngIf="(user$ | async)?.isSet">
-      <div *ngIf="(notifications$ | async)?.length as count" (mouseleave)="clearNotifications(); showNotifications = false" (mouseenter)="showNotifications = true;" style="background-color: red; height: 28px; width: 28px; margin-right: 10px; border-radius: 4px; display: flex; justify-content: center">
+      <div *ngIf="(notifications$ | async)?.length as count" (mouseenter)="showNotifications = true;" style="background-color: red; height: 28px; width: 28px; margin-right: 10px; border-radius: 4px; display: flex; justify-content: center">
         <p>{{count}}</p>
         <ng-container *ngIf="showNotifications">
           <div style="position: absolute; top: 60px">
