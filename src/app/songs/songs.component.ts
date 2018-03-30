@@ -40,7 +40,6 @@ export class SongsComponent implements OnInit {
     this.isSearching$ = songState$.pipe(map((state) => state && state.searching));
     this.searchResults$ = songState$.pipe(
       map((state) => state && state.searchResults));
-    )
     this.addedSongs$ = songState$.pipe(map((state) => state && state.addedSongs));
   }
 

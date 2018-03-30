@@ -1,7 +1,9 @@
 require('dotenv').config();
+const http = require('http');
 const express = require('express');
 const app = express();
-const wsocket = require('express-ws')(app);
+const httpServer = http.createServer(app);
+const wsocket = require('express-ws')(app, httpServer);
 const parser = require('body-parser');
 
 const uuid = require('uuid/v4');
@@ -29,11 +31,13 @@ app.use(express.static('dist'));
 let sockets = [];
 
 var food = require('./food');
-
 app.use('/api/food', food.router);
 
 var songs = require('./songs');
 app.use('/api/songs', songs.router);
+
+var games = require('./games');
+app.use('/api/games', games.router);
 
 app.ws('/', (ws, req) => {
   const id = uuid();
@@ -92,6 +96,15 @@ songs.emitter.on('song', data => {
   notifySockets(package);
 });
 
+games.emitter.on('game', data => {
+  const package = {
+    data,
+    type: 'game'
+  };
+
+  notifySockets(package);
+});
+
 app.get('/', (req, res) => fs.createReadStream('dist/index.html').pipe(res));
 
-app.listen(port, () => console.log(`Server running: PORT ${port}`));
+httpServer.listen(port, () => console.log(`Server running: PORT ${port}`));

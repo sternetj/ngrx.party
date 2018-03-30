@@ -42,7 +42,7 @@ export class FoodComponent implements OnInit {
         ...food.users,
         this.currentUser,
       ]
-    }
+    };
 
     this.store.dispatch(new UpdateFood(newFood));
   }

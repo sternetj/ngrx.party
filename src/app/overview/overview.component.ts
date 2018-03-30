@@ -1,9 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 
-import { AppState, foodSelectors, selectSongs } from '../core/state';
+import { AppState, foodSelectors, selectSongs, gameSelectors } from '../core/state';
 
 import { Store } from '@ngrx/store';
-import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+
+import { combineLatest } from 'rxjs/observable/combineLatest';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -16,31 +17,37 @@ export class OverviewComponent implements OnInit, OnDestroy {
 
   public foodCount;
   public songCount;
+  public countsSubscription;
 
-  public counts = {
-    bringing: 0,
-    total: 0,
-    songs: 0
+    public counts = {
+      food: {
+        bringing: 0,
+        total: 0,
+      },
+      games: 0,
+      songs: 0,
   };
 
   public countPercentage = 0;
 
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<AppState>) {}
 
   public ngOnInit() {
-    this.foodCount = this.store.select(foodSelectors.counts)
-    .subscribe((counts) => {
-      this.counts = {...this.counts, ...counts};
-      this.countPercentage = counts.bringing / counts.total * 100;
-    });
+    this.countsSubscription = combineLatest(
+      this.store.select(foodSelectors.counts),
+      this.store.select(gameSelectors.counts),
+      this.store.select(selectSongs).pipe(map((songs) => songs.addedSongs.length))
+    ).subscribe(([foodCounts, gameCounts, songsCount]) => {
+      this.counts.food.bringing = foodCounts.bringing;
+      this.counts.food.total = foodCounts.total;
+      this.countPercentage = foodCounts.bringing / foodCounts.total * 100;
 
-    this.songCount = this.store.select(selectSongs).pipe(map((songs) => songs.addedSongs)).subscribe((songs) => {
-      this.counts.songs = songs.length;
+      this.counts.games = gameCounts;
+      this.counts.songs = songsCount;
     });
   }
 
   public ngOnDestroy() {
-    this.foodCount.unsubscribe();
-    this.songCount.unsubscribe();
+    this.countsSubscription.unsubscribe();
   }
 }

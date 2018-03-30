@@ -89,12 +89,12 @@ export class AppComponent implements OnInit {
     },
     {
       path: '/food',
-      label: 'Food'
+      label: 'Food',
+    },
+    {
+      path: '/games',
+      label: 'Games',
     }
-    // {
-    //   path: '/games',
-    //   lable: 'Games',
-    // }
   ];
 
   public partyState = '';

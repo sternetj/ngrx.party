@@ -15,6 +15,7 @@ import { AppState } from '../../core/state';
 import { SetFood } from '../../core/state/food/food.actions';
 import { environment } from '../../../environments/environment';
 import { SetAddedSongs } from '../../core/state/songs/songs.actions';
+import { SetGame } from '../../core/state/game/game.actions';
 
 @Injectable()
 export class WebSocketService {
@@ -38,7 +39,8 @@ export class WebSocketService {
     }
 
     constructor(private store: Store<AppState>) {
-        this.wsSocket = this.connect('ws://' + environment.websocketEndpoint);
+        const protocol = window.location.protocol.toUpperCase() === 'HTTPS:' ? 'wss' : 'ws';
+        this.wsSocket = this.connect(`${protocol}://${environment.websocketEndpoint}`);
 
         const incomingMessage$ = this.wsSocket.pipe(
             filter((message) => !!message),
@@ -56,6 +58,12 @@ export class WebSocketService {
           filter((message: {type: string}) => message.type === 'song')
         ).subscribe((message) => {
             this.store.dispatch(new SetAddedSongs(message.data));
+        });
+
+        incomingMessage$.pipe(
+          filter((message: {type: string}) => message.type === 'game')
+        ).subscribe((message) => {
+            this.store.dispatch(new SetGame(message.data));
         });
 
         Observable.timer(0, 15000).subscribe(() => {
