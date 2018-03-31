@@ -1,5 +1,5 @@
 import { TestModule } from './../../../test/test.module';
-import { MatDialogModule, MatInputModule } from '@angular/material';
+import { MatDialogModule, MatInputModule, MatDialogRef } from '@angular/material';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WelcomeModalComponent } from './welcome-modal.component';
@@ -15,6 +15,9 @@ describe('WelcomeModalComponent', () => {
         MatDialogModule,
         MatInputModule,
         TestModule,
+      ],
+      providers: [
+        { provide: MatDialogRef, useValue: { close: () => undefined } }
       ]
     })
     .compileComponents();

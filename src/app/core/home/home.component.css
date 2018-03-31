@@ -1,0 +1,11 @@
+.mat-primary, .mat-accent {
+  font-weight: 500;
+}
+
+.mat-accent {
+  color: #ff4081;
+}
+
+.mat-primary {
+  color: #3f51b5;
+}

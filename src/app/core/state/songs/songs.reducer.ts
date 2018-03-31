@@ -26,6 +26,7 @@ export function reducer(state = defaultState, action: actions.Actions) {
     }
     case actions.CLEAR_SEARCH: {
       return {
+        ...state,
         searching: false,
         search: undefined,
         searchResults: [],

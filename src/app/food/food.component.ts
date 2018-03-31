@@ -1,4 +1,4 @@
-import { SetFood, GetFood, AddFood, CreateFood, UpdateFood } from './../core/state/food/food.actions';
+import { SetFood, AddFood, CreateFood, UpdateFood } from './../core/state/food/food.actions';
 import { take } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import { AppState, selectFood, selectUser } from './../core/state/index';
@@ -23,8 +23,6 @@ export class FoodComponent implements OnInit {
     this.food$ = this.store.select(selectFood);
 
     this.store.select(selectUser).pipe(take(1)).subscribe((user) => this.currentUser = user);
-
-    this.store.dispatch(new GetFood());
   }
 
   public addFood(event: {food: Food, willBring: boolean}) {

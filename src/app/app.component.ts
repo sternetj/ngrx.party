@@ -23,6 +23,9 @@ import {
   query,
   animateChild
 } from '@angular/animations';
+import { GetFood } from './core/state/food/food.actions';
+import { GetGame } from './core/state/game/game.actions';
+import { GetAllSongs } from './core/state/songs/songs.actions';
 
 @Component({
   selector: 'app-root',
@@ -108,6 +111,10 @@ export class AppComponent implements OnInit {
   ) {}
 
   public ngOnInit() {
+    this.store.dispatch(new GetFood());
+    this.store.dispatch(new GetGame());
+    this.store.dispatch(new GetAllSongs());
+
     this.user$ = this.store.select(selectUser);
 
     this.user$.pipe(filter(user => !user.isSet), take(1)).subscribe(() => {

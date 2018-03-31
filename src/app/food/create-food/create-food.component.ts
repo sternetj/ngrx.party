@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, ChangeDetectionStrategy, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
 import { Food } from '../../shared/models/food';
 import { NgForm } from '@angular/forms';
 
@@ -10,6 +10,8 @@ import { NgForm } from '@angular/forms';
 })
 export class CreateFoodComponent {
   @ViewChild(NgForm) private form: NgForm;
+  @ViewChild('nameInput') private input: ElementRef;
+
   public newFood: Food = {
     id: undefined,
     name: undefined,
@@ -28,9 +30,12 @@ export class CreateFoodComponent {
       willBring: this.willBring,
     });
 
-    this.form.reset();
-    this.newFood.count = 1;
+    this.input.nativeElement.focus();
+    this.form.reset({
+      willBring: true,
+      count: 1,
+    });
     this.newFood.users = [];
-    this.willBring = true;
+
   }
 }

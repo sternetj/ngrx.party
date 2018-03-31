@@ -10,7 +10,7 @@ import { WebSocketService } from '../shared/services/websocket.service';
 import { WelcomeModalComponent } from './welcome-modal/welcome-modal.component';
 import { reducers, effects } from './state';
 import { HttpClientModule } from '@angular/common/http';
-import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './home/home.component';
 import { SongService } from '../shared/services/songs.service';
 import { GameService } from '../shared/services/game.service';
 
@@ -31,7 +31,7 @@ import { GameService } from '../shared/services/game.service';
       SongService,
       WebSocketService,
     ],
-    declarations: [WelcomeModalComponent, RegisterComponent],
+    declarations: [WelcomeModalComponent, HomeComponent],
     entryComponents: [
       WelcomeModalComponent,
     ]
