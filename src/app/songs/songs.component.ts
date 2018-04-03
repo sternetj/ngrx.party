@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import { Song } from '../shared/models/song';
-import { UpdateSearch, ClearSearch, AddSong, GetAllSongs } from '../core/state/songs/songs.actions';
+import { UpdateSearch, ClearSearch, AddSong } from '../core/state/songs/songs.actions';
 import { trigger, transition, query, stagger, animate, style } from '@angular/animations';
 
 @Component({
@@ -32,8 +32,6 @@ export class SongsComponent implements OnInit {
   constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
-    this.store.dispatch(new GetAllSongs());
-
     const songState$ = this.store.select(selectSongs);
 
     this.search$ = songState$.pipe(map((state) => state && state.search));

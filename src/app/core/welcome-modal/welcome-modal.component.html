@@ -4,10 +4,10 @@
   <div style="display: flex; align-items: flex-end;">
     <app-user-icon [logo]="profileImages[profileIndex]" size="80" color="primary" matTooltip="Click to change" matTooltipPosition="right" (click)="nextImage()"></app-user-icon>
     <mat-form-field style="margin-left: 20px; flex-grow: 1;">
-      <input matInput #name placeholder="Enter your Name" />
+      <input matInput [(ngModel)]="name" placeholder="Enter your Name" (keyup.enter)="name && closeDialog()" />
     </mat-form-field>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions style="justify-content: flex-end;">
-  <button [disabled]="!name.value" mat-raised-button color="warn" [mat-dialog-close]="{'logo': profileImages[profileIndex], 'name': name.value}">Continue</button>
+  <button [disabled]="!name" mat-raised-button color="warn" (click)="closeDialog()">Continue</button>
 </mat-dialog-actions>

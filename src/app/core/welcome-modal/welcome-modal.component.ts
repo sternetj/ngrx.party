@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-welcome-modal',
   templateUrl: './welcome-modal.component.html',
   styleUrls: ['./welcome-modal.component.css']
 })
-export class WelcomeModalComponent implements OnInit {
+export class WelcomeModalComponent {
   public profileImages = [
     '//ssl.gstatic.com/docs/common/profile/alligator_lg.png',
     '//ssl.gstatic.com/docs/common/profile/anteater_lg.png',
@@ -71,16 +72,21 @@ export class WelcomeModalComponent implements OnInit {
   ];
 
   public profileIndex = 0;
+  public name = '';
 
-  constructor() {
+  constructor(public dialogRef: MatDialogRef<WelcomeModalComponent>) {
     this.profileIndex = Math.floor(Math.random() * this.profileImages.length);
-  }
-
-  ngOnInit() {
   }
 
   public nextImage() {
     this.profileIndex = (this.profileIndex + 1) % this.profileImages.length;
+  }
+
+  public closeDialog() {
+    this.dialogRef.close({
+      logo: this.profileImages[this.profileIndex],
+      name: this.name
+    });
   }
 
 }
