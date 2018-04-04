@@ -53,22 +53,16 @@ app.ws('/', (ws, req) => {
   });
   console.log('connected:', id);
 
-  ws.send({
-    action: 'ID',
-    payload: {
-      id: id
-    }
-  });
-
-  ws.on('message', msg => {
-    console.log(msg);
-  });
-
+  ws.send(JSON.stringify({
+    type: 'id',
+    data: id,
+  }));
 });
 
-const notifySockets = (data) => {
+const notifySockets = (data, user) => {
+  console.log(data)
   sockets
-    .filter(sock => sock.readyState === sock.OPEN)
+    .filter(sock => sock.readyState === sock.OPEN && sock.id !== user)
     .forEach(sock => {
       try {
         sock.socket.send(JSON.stringify(data));
@@ -80,11 +74,12 @@ const notifySockets = (data) => {
 
 food.emitter.on('food', data => {
   const package = {
-    data,
-    type: 'food'
+    data: data.food,
+    type: 'food',
+    user: data.user
   };
 
-  notifySockets(package);
+  notifySockets(package, data.user);
 });
 
 songs.emitter.on('song', data => {

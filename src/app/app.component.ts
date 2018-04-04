@@ -8,7 +8,7 @@ import { filter, take } from 'rxjs/operators';
 
 import { Food } from './shared/models/food';
 import { WelcomeModalComponent } from './core/welcome-modal/welcome-modal.component';
-import { AppState, selectUser, selectSongs } from './core/state';
+import { AppState, selectUser, selectSongs, notificationSelectors } from './core/state';
 import { State } from './core/state/user/user.reducer';
 
 import { Subject } from 'rxjs/Subject';
@@ -26,6 +26,7 @@ import {
 import { GetFood } from './core/state/food/food.actions';
 import { GetGame } from './core/state/game/game.actions';
 import { GetAllSongs } from './core/state/songs/songs.actions';
+import { ClearNotifications } from './core/state/notifications/notifications.actions';
 
 @Component({
   selector: 'app-root',
@@ -81,6 +82,10 @@ import { GetAllSongs } from './core/state/songs/songs.actions';
 })
 export class AppComponent implements OnInit {
   public user$: Observable<State>;
+  public notifications$;
+
+  public showNotifications = false;
+
   public navLinks = [
     {
       path: '/',
@@ -117,7 +122,13 @@ export class AppComponent implements OnInit {
 
     this.user$ = this.store.select(selectUser);
 
-    this.user$.pipe(filter(user => !user.isSet), take(1)).subscribe(() => {
+    this.notifications$ = this.store.select(notificationSelectors.notifications);
+
+
+    this.user$.pipe(
+      filter((user) => !user.isSet),
+      take(1)
+    ).subscribe(() => {
       setTimeout(() => this.openWelcomModal());
     });
 
@@ -126,6 +137,12 @@ export class AppComponent implements OnInit {
         window.localStorage.setItem('user-info', JSON.stringify(user));
       });
     };
+
+    this.store.dispatch(new GetFood());
+  }
+
+  public clearNotifications() {
+    this.store.dispatch(new ClearNotifications());
   }
 
   public openWelcomModal() {

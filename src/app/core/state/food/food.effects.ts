@@ -25,7 +25,7 @@ export class FoodEffects {
   @Effect() add$: Observable<Action> = this.actions$.pipe(
     ofType(CREATE_FOOD),
     exhaustMap((action: CreateFood) =>
-      this.foodService.create(action.food).pipe(
+      this.foodService.create(action.food, this.wsService.id).pipe(
         map(data => new AddFood(data)),
     ))
   );

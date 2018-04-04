@@ -73,14 +73,14 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    var newFood = setObtained(req.body);
+    var newFood = setObtained(req.body.food);
 
     food.push({
       ...newFood,
       id: uuid(),
     });
 
-    emitter.emit('food', food);
+    emitter.emit('food', { food, user: req.body.user });
 
     res.send(newFood);
 });
