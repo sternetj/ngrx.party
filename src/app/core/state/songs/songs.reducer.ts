@@ -3,14 +3,12 @@ import { Song } from '../../../shared/models/song';
 
 export interface State {
   search: string;
-  searching: boolean;
   searchResults: Song[];
   addedSongs: Song[];
 }
 
 const defaultState: State = {
   search: undefined,
-  searching: false,
   searchResults: [],
   addedSongs: [],
 };
@@ -20,14 +18,12 @@ export function reducer(state = defaultState, action: actions.Actions) {
     case actions.UPDATE_SEARCH: {
       return {
         ...state,
-        searching: true,
         search: action.search,
       };
     }
     case actions.CLEAR_SEARCH: {
       return {
         ...state,
-        searching: false,
         search: undefined,
         searchResults: [],
       };
@@ -35,7 +31,6 @@ export function reducer(state = defaultState, action: actions.Actions) {
     case actions.SET_SEARCH_RESULTS: {
       return {
         ...state,
-        searching: false,
         searchResults: action.songs,
       };
     }
@@ -50,7 +45,6 @@ export function reducer(state = defaultState, action: actions.Actions) {
         ...state,
         addedSongs: [...state.addedSongs, action.song],
         searchResults: [],
-        searching: false,
         search: undefined,
       };
     }

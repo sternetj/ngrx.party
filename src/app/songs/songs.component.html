@@ -9,7 +9,8 @@
   </div>
   <div class="row" style="display: block">
     <div class="col-xs-12">
-      <ng-container *ngIf="isSearching$ | async; else results">
+      <!-- update *ngIf -->
+      <ng-container *ngIf="false; else results">
         <div style="display: flex; justify-content: center; align-items: center; padding: 60px;">
           <mat-spinner></mat-spinner>
         </div>

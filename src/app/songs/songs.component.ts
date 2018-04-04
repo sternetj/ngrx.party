@@ -25,7 +25,7 @@ import { trigger, transition, query, stagger, animate, style } from '@angular/an
 })
 export class SongsComponent implements OnInit {
   public search$: Observable<string>;
-  public isSearching$: Observable<boolean>;
+  // song-dec
   public searchResults$: Observable<Song[]>;
   public addedSongs$: Observable<Song[]>;
 
@@ -35,7 +35,7 @@ export class SongsComponent implements OnInit {
     const songState$ = this.store.select(selectSongs);
 
     this.search$ = songState$.pipe(map((state) => state && state.search));
-    this.isSearching$ = songState$.pipe(map((state) => state && state.searching));
+    // song-is-searching
     this.searchResults$ = songState$.pipe(
       map((state) => state && state.searchResults));
     this.addedSongs$ = songState$.pipe(map((state) => state && state.addedSongs));
