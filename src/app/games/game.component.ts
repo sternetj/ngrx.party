@@ -1,4 +1,4 @@
-import { GetGame, CreateGame } from './../core/state/game/game.actions';
+import { CreateGame } from './../core/state/game/game.actions';
 import { take, filter } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import { AppState, selectGames, selectUser } from './../core/state/index';
@@ -21,11 +21,6 @@ export class GameComponent implements OnInit {
 
   public ngOnInit() {
     this.games$ = this.store.select(selectGames);
-
-    this.games$.pipe(
-      filter((games) => !games.length),
-      take(1),
-    ).subscribe(() => this.store.dispatch(new GetGame()));
 
     this.store.select(selectUser).pipe(take(1)).subscribe((user) => this.currentUser = user);
   }

@@ -4,7 +4,7 @@
       <img class="mat-elevation-z6 mx-auto d-block" src="/assets/party-poster.png" style="height: 250px; margin: 0 auto;">
     </div>
     <div class="col-12" style="margin-top: 15px">
-        <p class="text-center" style="font-size: 2.5rem">April 18th @ 7PM</p>
+        <p class="text-center" style="font-size: 2.5rem">April 18th @ 3PM</p>
       </div>
     <h2 class="col-12" style="margin-top: 15px">
       Food
@@ -12,8 +12,8 @@
     <div class="col-12">
       <mat-progress-bar mode="determinate" [value]="countPercentage"></mat-progress-bar>
         <div style="display: flex; justify-content: flex-end">
-          <button *ngIf="!counts.food.total; else count" mat-button color="accent" routerLink="/food">Add some food!</button>
-          <ng-template #count>
+          <button *ngIf="!counts.food.total; else foodCount" mat-button color="accent" routerLink="/food">Add some food!</button>
+          <ng-template #foodCount>
             <span style="font-size: 24px">{{counts.food.bringing}} / {{counts.food.total}}</span>
           </ng-template>
         </div>
@@ -24,8 +24,8 @@
     <div class="col-12">
         <mat-progress-bar mode="determinate" [value]="counts.games * 10"></mat-progress-bar>
         <div style="display: flex; justify-content: flex-end">
-          <button *ngIf="!counts.games; else count" mat-button color="accent" routerLink="/games">Add a Game!</button>
-          <ng-template #count>
+          <button *ngIf="!counts.games; else gameCount" mat-button color="accent" routerLink="/games">Add a Game!</button>
+          <ng-template #gameCount>
             <span style="font-size: 24px">{{counts.games}} / 10</span>
           </ng-template>
         </div>
@@ -34,7 +34,10 @@
       Songs
     </h2>
     <div class="col-12">
-        <p class="text-center" style="font-size: 4rem; color: #3f51b5;">34</p>
+        <p class="text-center" style="font-size: 4rem; color: #3f51b5;">{{counts.songs}}</p>
+    </div>
+    <div class="col-12 text-center">
+        <button *ngIf="counts.songs;" mat-raised-button color="accent" (click)="startParty.emit()">Start the Party!</button>
     </div>
   </div>
 </mat-card>

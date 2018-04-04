@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, ChangeDetectionStrategy, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
 import { Game } from '../../shared/models/game';
 import { NgForm } from '@angular/forms';
 
@@ -10,6 +10,8 @@ import { NgForm } from '@angular/forms';
 })
 export class CreateGameComponent {
   @ViewChild(NgForm) private form: NgForm;
+  @ViewChild('nameInput') private input: ElementRef;
+
   @Output() private addGame = new EventEmitter<Game>();
 
   public newGame: Game = new Game();
@@ -17,6 +19,7 @@ export class CreateGameComponent {
   public addNewGame() {
     this.addGame.emit(this.newGame);
 
+    this.input.nativeElement.focus();
     this.form.reset();
   }
 }

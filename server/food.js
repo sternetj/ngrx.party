@@ -50,7 +50,13 @@ var food = [{
     }]
   }];
 
+const setObtained = (food) => {
+  if(food.count === (food.users || []).length) {
+    food.obtained = true;
+  }
 
+  return food;
+}
 
 router.get('/', (req, res) => res.send(food));
 
@@ -67,7 +73,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    var newFood = req.body.food;
+    var newFood = setObtained(req.body.food);
 
     food.push({
       ...newFood,
@@ -88,7 +94,7 @@ router.put('/', (req, res) => {
       return;
   }
 
-  food.splice(currentIndex, 1, req.body);
+  food.splice(currentIndex, 1, setObtained(req.body));
 
   console.log(food)
 
