@@ -13,7 +13,6 @@ const defaultState: State = {
 export function reducer (state: State = defaultState, action: actions.Actions) {
   switch (action.type) {
     case actions.ADD_NOTIFICATION: {
-      console.log(action.notification)
       return {
         ...state,
         notifications: [...state.notifications, action.notification],
