@@ -1,4 +1,3 @@
-import { AddFood, CreateFood, UpdateFood } from './../core/state/food/food.actions';
 import { take } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import { AppState, foodSelectors, selectUser } from './../core/state/index';
@@ -28,7 +27,7 @@ export class FoodComponent implements OnInit {
       event.food.users.push(this.currentUser);
     }
 
-    this.store.dispatch(new CreateFood({ ...event.food }));
+    // dispatch to store
   }
 
   public updateFood(food: Food) {
@@ -40,7 +39,7 @@ export class FoodComponent implements OnInit {
       ]
     };
 
-    this.store.dispatch(new UpdateFood(newFood));
+    // dispatch to store
   }
 
   public isUserBringing(food: Food) {
