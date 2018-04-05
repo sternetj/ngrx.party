@@ -10,7 +10,7 @@
       Food
     </h2>
     <div class="col-12">
-      <mat-progress-bar mode="determinate" [value]="countPercentage"></mat-progress-bar>
+      <mat-progress-bar mode="determinate" [value]="counts.food.bringing / counts.food.total * 100"></mat-progress-bar>
         <div style="display: flex; justify-content: flex-end">
           <button *ngIf="!counts.food.total; else foodCount" mat-button color="accent" routerLink="/food">Add some food!</button>
           <ng-template #foodCount>

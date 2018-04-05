@@ -1,7 +1,7 @@
 import { AddFood, CreateFood, UpdateFood } from './../core/state/food/food.actions';
 import { take } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
-import { AppState, selectFood, selectUser } from './../core/state/index';
+import { AppState, foodSelectors, selectUser } from './../core/state/index';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Food } from '../shared/models/food';
@@ -20,8 +20,6 @@ export class FoodComponent implements OnInit {
   constructor(private store: Store<AppState>) { }
 
   public ngOnInit() {
-    this.food$ = this.store.select(selectFood);
-
     this.store.select(selectUser).pipe(take(1)).subscribe((user) => this.currentUser = user);
   }
 

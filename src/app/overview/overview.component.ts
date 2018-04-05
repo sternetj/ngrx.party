@@ -28,20 +28,13 @@ export class OverviewComponent implements OnInit, OnDestroy {
       songs: 0,
   };
 
-  public countPercentage = 0;
-
   constructor(private store: Store<AppState>) {}
 
   public ngOnInit() {
     this.countsSubscription = combineLatest(
-      this.store.select(foodSelectors.counts),
       this.store.select(gameSelectors.counts),
       this.store.select(selectSongs).pipe(map((songs) => songs.addedSongs.length))
-    ).subscribe(([foodCounts, gameCounts, songsCount]) => {
-      this.counts.food.bringing = foodCounts.bringing;
-      this.counts.food.total = foodCounts.total;
-      this.countPercentage = foodCounts.bringing / foodCounts.total * 100;
-
+    ).subscribe(([gameCounts, songsCount]) => {
       this.counts.games = gameCounts;
       this.counts.songs = songsCount;
     });

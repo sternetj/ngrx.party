@@ -34,7 +34,5 @@ export { notificationSelectors } from './notifications/notifciations.selectors';
 
 export const selectAppState = (state: AppState) => state;
 export const selectUser = createSelector(selectAppState, (state: AppState) => state.user);
-export const selectSupplies = createSelector(selectAppState, (state: AppState) => state.food);
-export const selectFood = createSelector(selectSupplies, (state: food.State) => state.food);
 export const selectGames = createSelector(selectAppState, (state: AppState) => state.game && state.game.games);
 export const selectSongs = createSelector(selectAppState, (state: AppState) => state.songs);
