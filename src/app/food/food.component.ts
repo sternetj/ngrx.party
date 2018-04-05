@@ -1,4 +1,4 @@
-import { SetFood, AddFood, CreateFood, UpdateFood } from './../core/state/food/food.actions';
+import { AddFood, CreateFood, UpdateFood } from './../core/state/food/food.actions';
 import { take } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import { AppState, selectFood, selectUser } from './../core/state/index';

@@ -12,12 +12,6 @@ const defaultState: State = {
 
 export function reducer (state: State = defaultState, action: actions.Actions) {
   switch (action.type) {
-    case actions.SET_FOOD: {
-      return {
-        ...state,
-        food: action.food,
-      };
-    }
     case actions.CREATE_FOOD: {
       return {
         ...state,

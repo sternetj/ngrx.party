@@ -6,7 +6,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { SharedModule } from '../shared/shared.module';
 import { FoodService } from '../shared/services/food.service';
-import { WebSocketService } from '../shared/services/websocket.service';
 import { WelcomeModalComponent } from './welcome-modal/welcome-modal.component';
 import { reducers, effects } from './state';
 import { HttpClientModule } from '@angular/common/http';
@@ -29,7 +28,6 @@ import { GameService } from '../shared/services/game.service';
       FoodService,
       GameService,
       SongService,
-      WebSocketService,
     ],
     declarations: [WelcomeModalComponent, HomeComponent],
     entryComponents: [

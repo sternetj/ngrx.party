@@ -7,8 +7,7 @@ import { catchError, map, exhaustMap, tap } from 'rxjs/operators';
 
 import { FoodService } from '../../../shared/services/food.service';
 
-import { GET_FOOD, ADD_FOOD, UPDATE_FOOD, AddFood, CreateFood, SetFood, UpdateFood, CREATE_FOOD } from './food.actions';
-import { WebSocketService } from '../../../shared/services/websocket.service';
+import { ADD_FOOD, UPDATE_FOOD, AddFood, CreateFood, UpdateFood, CREATE_FOOD } from './food.actions';
 
 @Injectable()
 export class FoodEffects {
@@ -22,6 +21,5 @@ export class FoodEffects {
   constructor(
     private foodService: FoodService,
     private actions$: Actions,
-    private wsService: WebSocketService,
   ) {}
 }

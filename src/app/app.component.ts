@@ -13,7 +13,6 @@ import { State } from './core/state/user/user.reducer';
 
 import { Subject } from 'rxjs/Subject';
 
-import { WebSocketService } from './shared/services/websocket.service';
 import {
   trigger,
   state,
@@ -23,7 +22,6 @@ import {
   query,
   animateChild
 } from '@angular/animations';
-import { GetFood } from './core/state/food/food.actions';
 import { GetGame } from './core/state/game/game.actions';
 import { GetAllSongs } from './core/state/songs/songs.actions';
 import { ClearNotifications } from './core/state/notifications/notifications.actions';
@@ -111,12 +109,11 @@ export class AppComponent implements OnInit {
 
   constructor(
     private store: Store<AppState>,
-    private wsService: WebSocketService,
     private dialog: MatDialog
   ) {}
 
   public ngOnInit() {
-    this.store.dispatch(new GetFood());
+    // app-dispatch-food
     this.store.dispatch(new GetGame());
     this.store.dispatch(new GetAllSongs());
 
@@ -137,8 +134,6 @@ export class AppComponent implements OnInit {
         window.localStorage.setItem('user-info', JSON.stringify(user));
       });
     };
-
-    this.store.dispatch(new GetFood());
   }
 
   public clearNotifications() {
