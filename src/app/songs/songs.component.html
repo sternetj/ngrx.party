@@ -1,38 +1,7 @@
 <div class="container-fluid">
   <div class="row" style="display: block">
     <div class="col-xs-12">
-      <app-song-search
-        [searchText]="search$ | async"
-        (searchChange)="searchChanged($event)"
-        (clearSearch)="clearSearch()"></app-song-search>
+      Todo
     </div>
-  </div>
-  <div class="row" style="display: block">
-    <div class="col-xs-12">
-      <!-- update *ngIf -->
-      <ng-container *ngIf="false; else results">
-        <div style="display: flex; justify-content: center; align-items: center; padding: 60px;">
-          <mat-spinner></mat-spinner>
-        </div>
-      </ng-container>
-    </div>
-    <ng-template #results>
-      <ng-container *ngIf="searchResults$ | async as searchResults; else currentSongs">
-        <ng-container *ngIf="searchResults?.length > 0; else currentSongs">
-          <div @listAnimation style="display: flex; flex-direction: column;">
-            <app-search-result *ngFor="let song of searchResults; let index = index;"
-            style="margin-bottom: 20px; display: block"
-            [ngStyle]="{ zIndex: index * -1 }"
-            [song]="song"
-            (songAdded)="addSong($event)"></app-search-result>
-          </div>
-        </ng-container>
-      </ng-container>
-    </ng-template>
-    <ng-template #currentSongs>
-      <app-song-tile *ngFor="let song of addedSongs$ | async"
-        style="margin-bottom: 20px; display: block"
-        [song]="song"></app-song-tile>
-    </ng-template>
   </div>
 </div>

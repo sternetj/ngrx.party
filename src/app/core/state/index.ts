@@ -6,8 +6,6 @@ import * as game from './game/game.reducer';
 import * as songs from './songs/songs.reducer';
 import * as notifications from './notifications/notifications.reducer';
 
-import { FoodEffects } from './food/food.effects';
-import { GameEffects } from './game/game.effects';
 import { SongsEffects } from './songs/songs.effects';
 
 export interface AppState {
@@ -27,8 +25,6 @@ export const reducers: ActionReducerMap<any> = {
 };
 
 export const effects = [
-  FoodEffects,
-  GameEffects,
   SongsEffects,
 ];
 

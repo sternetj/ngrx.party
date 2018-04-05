@@ -30,7 +30,7 @@ export class FoodComponent implements OnInit {
       event.food.users.push(this.currentUser);
     }
 
-    this.store.dispatch(new CreateFood(event.food));
+    this.store.dispatch(new CreateFood({ ...event.food }));
   }
 
   public updateFood(food: Food) {

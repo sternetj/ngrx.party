@@ -13,30 +13,11 @@ import { WebSocketService } from '../../../shared/services/websocket.service';
 @Injectable()
 export class FoodEffects {
 
-  @Effect() fetch$: Observable<Action> = this.actions$.pipe(
-    ofType(GET_FOOD),
-    exhaustMap(action =>
-      this.foodService.getAll().pipe(
-        map(data => new SetFood(data)),
-      )
-    )
-  );
+  // Get All Food
 
-  @Effect() add$: Observable<Action> = this.actions$.pipe(
-    ofType(CREATE_FOOD),
-    exhaustMap((action: CreateFood) =>
-      this.foodService.create(action.food, this.wsService.id).pipe(
-        map(data => new AddFood(data)),
-    ))
-  );
+  // Create Food
 
-  @Effect() update$: Observable<Action> = this.actions$.pipe(
-    ofType(UPDATE_FOOD),
-    exhaustMap((action: UpdateFood) =>
-      this.foodService.update(action.food).pipe(
-        map(data => new UpdateFood(data)),
-    ))
-  );
+// food-effect-update
 
   constructor(
     private foodService: FoodService,

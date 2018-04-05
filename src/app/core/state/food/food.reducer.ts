@@ -18,7 +18,7 @@ export function reducer (state: State = defaultState, action: actions.Actions) {
         food: action.food,
       };
     }
-    case actions.ADD_FOOD: {
+    case actions.CREATE_FOOD: {
       return {
         ...state,
         food: [...state.food, action.food],
