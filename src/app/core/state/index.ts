@@ -1,7 +1,6 @@
 import { ActionReducerMap, createSelector } from '@ngrx/store';
 
 import * as user from './user/user.reducer';
-import * as food from './food/food.reducer';
 import * as game from './game/game.reducer';
 import * as songs from './songs/songs.reducer';
 import * as notifications from './notifications/notifications.reducer';
@@ -10,7 +9,6 @@ import { SongsEffects } from './songs/songs.effects';
 
 export interface AppState {
   user: user.State;
-  food: food.State;
   game: game.State;
   songs: songs.State;
   notifications: notifications.State;
@@ -18,7 +16,6 @@ export interface AppState {
 
 export const reducers: ActionReducerMap<any> = {
   user: user.reducer,
-  food: food.reducer,
   game: game.reducer,
   songs: songs.reducer,
   notifications: notifications.reducer,
