@@ -35,4 +35,4 @@ export class SetFood implements Action {
   constructor (public food: Food[]) { }
 }
 
-export type Actions = AddFood | UpdateFood | CreateFood;
+export type Actions = AddFood | UpdateFood | CreateFood | SetFood | GetFood;
