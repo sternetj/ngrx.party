@@ -4,7 +4,8 @@ import { Action } from '@ngrx/store';
 export const ADD_FOOD = '[Food] Add Food';
 export const CREATE_FOOD = '[Food] Create Food';
 export const UPDATE_FOOD = '[Food] Update Food';
-// food-action-get-set-types
+export const GET_FOOD = '[Food] Get Food';
+export const SET_FOOD = '[Food] Set Food';
 
 export class AddFood implements Action {
   readonly type = ADD_FOOD;
@@ -24,6 +25,14 @@ export class UpdateFood implements Action {
   constructor (public food: Food) { }
 }
 
-// food-action-get-set-actions
+export class GetFood implements Action {
+  readonly type = GET_FOOD;
+}
+
+export class SetFood implements Action {
+  readonly type = SET_FOOD;
+
+  constructor (public food: Food[]) { }
+}
 
 export type Actions = AddFood | UpdateFood | CreateFood;
