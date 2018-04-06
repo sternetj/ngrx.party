@@ -79,6 +79,7 @@ import { ClearNotifications } from './core/state/notifications/notifications.act
   ]
 })
 export class AppComponent implements OnInit {
+  // #region Class properties
   public user$: Observable<State>;
   public notifications$;
 
@@ -106,6 +107,7 @@ export class AppComponent implements OnInit {
   public partyState = '';
 
   @ViewChild('player') private player: ElementRef;
+  // #endregion
 
   constructor(
     private store: Store<AppState>,
@@ -114,9 +116,8 @@ export class AppComponent implements OnInit {
 
   public ngOnInit() {
     // app-dispatch-food
-    this.store.dispatch(new GetGame());
-    this.store.dispatch(new GetAllSongs());
 
+    // #region Setup
     this.user$ = this.store.select(selectUser);
 
     this.notifications$ = this.store.select(notificationSelectors.notifications);
@@ -134,8 +135,11 @@ export class AppComponent implements OnInit {
         window.localStorage.setItem('user-info', JSON.stringify(user));
       });
     };
+
+    // #endregion
   }
 
+  //#region Not important
   public clearNotifications() {
     this.store.dispatch(new ClearNotifications());
   }
@@ -173,4 +177,5 @@ export class AppComponent implements OnInit {
       }, 650);
   });
   }
+  // #endregion
 }
