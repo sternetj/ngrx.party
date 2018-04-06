@@ -5,8 +5,7 @@ import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-create-game',
   templateUrl: './create-game.component.html',
-  styleUrls: ['./create-game.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['./create-game.component.css']
 })
 export class CreateGameComponent {
   @ViewChild(NgForm) private form: NgForm;

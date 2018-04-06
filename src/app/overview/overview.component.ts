@@ -6,18 +6,21 @@ import { Store } from '@ngrx/store';
 
 import { combineLatest } from 'rxjs/observable/combineLatest';
 import { map } from 'rxjs/operators';
+import { GameStateService } from '../shared/services/game-state.service';
 
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.css']
 })
-export class OverviewComponent implements OnInit, OnDestroy {
+export class OverviewComponent implements OnInit{
   @Output() public startParty = new EventEmitter();
 
   public foodCount;
   public songCount;
   public countsSubscription;
+
+  public gamesCount;
 
     public counts = {
       food: {
@@ -30,24 +33,11 @@ export class OverviewComponent implements OnInit, OnDestroy {
 
   public countPercentage = 0;
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private gameState: GameStateService) {}
 
   public ngOnInit() {
-    this.countsSubscription = combineLatest(
-      this.store.select(foodSelectors.counts),
-      this.store.select(gameSelectors.counts),
-      this.store.select(selectSongs).pipe(map((songs) => songs.addedSongs.length))
-    ).subscribe(([foodCounts, gameCounts, songsCount]) => {
-      this.counts.food.bringing = foodCounts.bringing;
-      this.counts.food.total = foodCounts.total;
-      this.countPercentage = foodCounts.bringing / foodCounts.total * 100;
-
-      this.counts.games = gameCounts;
-      this.counts.songs = songsCount;
-    });
-  }
-
-  public ngOnDestroy() {
-    this.countsSubscription.unsubscribe();
+    this.gameState.currentGames$.subscribe((games) => {
+      this.gamesCount = games.length;
+    })
   }
 }

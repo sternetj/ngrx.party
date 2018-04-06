@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { SongService } from '../shared/services/songs.service';
 import { GameService } from '../shared/services/game.service';
+import { GameStateService } from '../shared/services/game-state.service';
+
 
 @NgModule({
     imports: [
@@ -30,6 +32,7 @@ import { GameService } from '../shared/services/game.service';
       GameService,
       SongService,
       WebSocketService,
+      GameStateService,
     ],
     declarations: [WelcomeModalComponent, HomeComponent],
     entryComponents: [

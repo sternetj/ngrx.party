@@ -92,14 +92,6 @@ export class AppComponent implements OnInit {
       label: 'Home'
     },
     {
-      path: '/songs',
-      label: 'Songs'
-    },
-    {
-      path: '/food',
-      label: 'Food',
-    },
-    {
       path: '/games',
       label: 'Games',
     }
