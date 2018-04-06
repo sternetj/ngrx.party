@@ -17,8 +17,8 @@ export class FoodService {
         return this.http.get<Food>(`/api/food/${id}`);
     }
 
-    public create(food: Food, user: string) {
-        return this.http.post<Food>(`/api/food`, { food, user });
+    public create(food: Food) {
+        return this.http.post<Food>(`/api/food`, { food, user: 'defaultUser' });
     }
 
     public update(food: Food) {
