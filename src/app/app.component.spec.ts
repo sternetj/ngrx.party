@@ -9,7 +9,7 @@ import { TestModule } from '../test/test.module';
 
 import { Food } from './shared/models/food';
 import { StoreModule } from '@ngrx/store';
-import { MatDialogModule, MatTabsModule } from '@angular/material';
+import { MatDialogModule, MatTabsModule, MatIconModule, MatButtonModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 import { WebSocketService } from './shared/services/websocket.service';
 
@@ -23,6 +23,8 @@ describe('AppComponent', () => {
         TestModule,
         MatDialogModule,
         MatTabsModule,
+        MatIconModule,
+        MatButtonModule,
         StoreModule.forRoot({}),
         RouterTestingModule.withRoutes([])
       ],
