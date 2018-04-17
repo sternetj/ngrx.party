@@ -9,15 +9,17 @@
 
     <mat-form-field>
       <input name="name" #nameInput [(ngModel)]="newFood.name" matInput placeholder="Name" maxlength="100" required />
+      <mat-hint align="end">{{nameInput.value?.length || 0}}/100</mat-hint>
     </mat-form-field>
 
     <mat-form-field>
       <input name="description" [(ngModel)]="newFood.description" matInput placeholder="Description"
-        maxlength="500" required />
+        maxlength="500" required #descriptionInput />
+        <mat-hint align="end">{{descriptionInput.value?.length || 0}}/500</mat-hint>
     </mat-form-field>
 
     <mat-form-field>
-      <input name="count" [(ngModel)]="newFood.count" matInput type="number" min="1" placeholder="Number needed" required
+      <input name="count" [(ngModel)]="newFood.count" matInput type="number" min="1" max="15" placeholder="Number needed" required
       />
     </mat-form-field>
 

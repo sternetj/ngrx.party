@@ -100,6 +100,6 @@ games.emitter.on('game', data => {
   notifySockets(package);
 });
 
-app.get('/', (req, res) => fs.createReadStream('dist/index.html').pipe(res));
+app.get(['/', '/**'], (req, res) => fs.createReadStream('dist/index.html').pipe(res));
 
 httpServer.listen(port, () => console.log(`Server running: PORT ${port}`));
