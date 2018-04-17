@@ -74,6 +74,9 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
     var newFood = setObtained(req.body.food);
+    newFood.count = Math.min(15, Math.max(1, newFood.count || 1));
+    newFood.description = (newFood.description || "").slice(0, 500);
+    newFood.name = (newFood.name || "").slice(0, 100);
 
     food.push({
       ...newFood,

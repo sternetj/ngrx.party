@@ -83,6 +83,8 @@ import { ClearNotifications } from './core/state/notifications/notifications.act
 export class AppComponent implements OnInit {
   public user$: Observable<State>;
   public notifications$;
+  public mouseOver = false;
+  public buttonHover = false;
 
   public showNotifications = false;
 

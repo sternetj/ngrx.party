@@ -24,6 +24,8 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
     var newGame = req.body;
+    newGame.description = (newFood.description || "").slice(0, 500);
+    newGame.name = (newFood.name || "").slice(0, 100);
 
     games.push({
       ...newGame,
